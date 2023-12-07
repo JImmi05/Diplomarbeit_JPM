@@ -25,20 +25,20 @@
         net/Profi - bus mit der integrierten Steuerung am Bandsystem verbunden. Damit sind sie innerhalb kürzester
         Zeit einsatzbereit.
       </p>
-      <img class="img" alt="Image" src="../assets/logo.svg" />
+      <img class="img" alt="Image" src="../assets/Bohrstation.png" />
       <button class="button">
-        <div class="text-wrapper-2">Erste Schritte</div>
+        <router-link to="/profil_erstellen" class="text-wrapper-2">Erste Schritte</router-link>
       </button>
       <p class="text-wrapper-3">Lernsystem der digitalen Lernfabrik im WIFI Dornbirn</p>
       <header class="header">
         <div class="cart-button">
           <div class="text-wrapper-4">Abmelden</div>
         </div>
-        <div class="text-wrapper-5">Mein Profil</div>
-        <div class="text-wrapper-6">Aufträge</div>
-        <div class="text-wrapper-7">Anleitungen</div>
-        <div class="text-wrapper-8">Startseite</div>
-        <div class="text-wrapper-9">Name</div>
+        <router-link to="/profil" class="text-wrapper-5">Mein Profil</router-link>
+        <router-link to="/aufträge" class="text-wrapper-6">Aufträge</router-link>
+        <router-link to="/anleitungen" class="text-wrapper-7">Anleitungen</router-link>
+        <router-link to="/" class="text-wrapper-8">Startseite</router-link>
+        <div class="text-wrapper-9">Lernplattform CPLAB</div>
       </header>
     </div>
   </div>
@@ -285,4 +285,5 @@ export default {
   top: 40px;
   white-space: nowrap;
 }
+
 </style>

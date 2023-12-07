@@ -22,19 +22,19 @@
         <div class="text-wrapper-11">1h</div>
         <div class="text-wrapper-12">Datum Abgabe</div>
         <div class="text-wrapper-13">Sensoren des Förderbands</div>
-        <img class="img" alt="Noonbrew ekmak" src="noonbrew-zicb4-ekmak-unsplash.png" />
+        <img class="img" alt="Noonbrew ekmak" src="../assets/Sensoren.png" />
       </div>
       <div class="aufgabe-2">
         <div class="text-wrapper-11">3h</div>
         <div class="text-wrapper-12">Datum Abgabe</div>
         <div class="text-wrapper-13">Bohrstation</div>
-        <img class="img" alt="Fkphulv m" src="k8-0-fkphulv-m-unsplash-2.png" />
+        <img class="img" alt="Fkphulv m" src="../assets/Bohrstation.png" />
       </div>
       <div class="aufgabe-3">
         <div class="text-wrapper-11">1.5 h</div>
         <div class="text-wrapper-12">Datum Abgabe</div>
         <div class="text-wrapper-13">Förderband</div>
-        <img class="img" alt="Ed o neil" src="ed-o-neil-avvdzlhdowa-unsplash-1.png" />
+        <img class="img" alt="Ed o neil" src="../assets/image-9.png" />
       </div>
       <div class="page-heading">
         <img class="divider" alt="Divider" src="divider.svg" />
@@ -50,11 +50,11 @@
         <div class="cart-button">
           <div class="text-wrapper-15">Abmelden</div>
         </div>
-        <div class="text-wrapper-16">Mein Profil</div>
-        <div class="text-wrapper-17">Aufträge</div>
-        <div class="text-wrapper-18">Anleitungen</div>
-        <div class="text-wrapper-19">Startseite</div>
-        <div class="text-wrapper-20">Name</div>
+        <router-link to="/profil" class="text-wrapper-16">Mein Profil</router-link>
+        <router-link to="/aufträge" class="text-wrapper-17">Aufträge</router-link>
+        <router-link to="/anleitungen" class="text-wrapper-18">Anleitungen</router-link>
+        <router-link to="/" class="text-wrapper-19">Startseite</router-link>
+        <div class="text-wrapper-20">Lernplattform CPLAB</div>
       </div>
     </div>
   </div>
