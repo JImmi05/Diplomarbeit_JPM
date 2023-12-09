@@ -37,7 +37,7 @@
         <img class="img" alt="Ed o neil" src="../assets/image-9.png" />
       </div>
       <div class="page-heading">
-        <img class="divider" alt="Divider" src="divider.svg" />
+        <!--img class="divider" alt="Divider" src="divider.svg" /-->  <!-- Braucht es das????-->
         <div class="frame-wrapper">
           <div class="div-wrapper">
             <div class="div-wrapper">

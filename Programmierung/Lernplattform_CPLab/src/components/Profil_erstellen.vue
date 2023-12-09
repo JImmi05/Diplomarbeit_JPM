@@ -1,18 +1,27 @@
 <template>
     <div class="profil-anlegen">
       <div class="div">
-        <div class="e-mail">
-          <div class="text-wrapper">Passwort:</div>
-        </div>
-        <div class="div-wrapper">
-          <div class="text-wrapper">E-Mail:</div>
-        </div>
-        <div class="jahrgang">
-          <div class="text-wrapper">Jahrgang:</div>
-        </div>
-        <div class="username">
-          <div class="text-wrapper">Profilname:</div>
-        </div>
+        <form id="signup-form">
+          <div class="e-mail">
+            <div class="text-wrapper">Passwort:</div>
+            <input type="passwort" id="signup-password">
+          </div>
+          <div class="div-wrapper">
+            <div class="text-wrapper">E-Mail:</div>
+            <input type="email" id="signup-email">
+          </div>
+          <div class="jahrgang">
+            <div class="text-wrapper">Jahrgang:</div>
+            <input type="text" id="signup-jahrgang">
+          </div>
+          <div class="username">
+            <div class="text-wrapper">Profilname:</div>
+            <input type="text" id="signup-profilename">
+          </div>
+            <div class="cart-button">
+            <button type="submit" class="text-wrapper-10">Speichern</button>
+          </div>
+        </form>
         <div class="summary">
           <div class="text-wrapper-2">n</div>
           <div class="text-wrapper-3">Gesamt</div>
@@ -27,7 +36,7 @@
         <div class="page-heading">
           <div class="overlap">
             <div class="overlap-group">
-              <img class="divider" alt="Divider" src="divider.svg" />
+              <!--img class="divider" alt="Divider" src="divider.svg" /-->  <!-- Braucht es das????-->
               <div class="frame-wrapper">
                 <div class="frame-2">
                   <div class="frame-2">
@@ -40,9 +49,7 @@
           </div>
         </div>
         <div class="navigation">
-          <div class="cart-button">
-            <div class="text-wrapper-10">Speichern</div>
-          </div>
+
             <router-link to="/profil" class="text-wrapper-11">Mein Profil</router-link>
             <router-link to="/aufträge" class="text-wrapper-12">Aufträge</router-link>
             <router-link to="/anleitungen" class="text-wrapper-13">Anleitungen</router-link>
@@ -54,10 +61,41 @@
   </template>
   
   <script>
+// Import the functions you need from the SDKs you need
+  import { initializeApp } from "firebase/app";
+  import { getAnalytics } from "firebase/analytics";
+  import { getAuth } from "firebase/auth";
+  import { getFirestore } from "firebase/firestore";
+
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyCn6vUOiF9SQ1hlMB7Us4FWPFOdnbx1DiM",
+    authDomain: "lernplattform-cplab.firebaseapp.com",
+    projectId: "lernplattform-cplab",
+    storageBucket: "lernplattform-cplab.appspot.com",
+    messagingSenderId: "678246357632",
+    appId: "1:678246357632:web:582d432e75eb768985a465",
+    measurementId: "G-82N4YY9NLB"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  
+
+
   export default {
     name: "ProfilAnlegen",
   };
+  
   </script>
+
   
   <style>
   .profil-anlegen {
@@ -347,11 +385,11 @@
     background-color: #426b1f;
     border-radius: 8px;
     height: 48px;
-    left: 1218px;
+    left: 260px;
     overflow: hidden;
     position: absolute;
-    top: 32px;
-    width: 126px;
+    top: 610px;
+    width: 200px;
   }
   
   .profil-anlegen .text-wrapper-10 {
@@ -442,5 +480,12 @@
     top: 40px;
     white-space: nowrap;
   }
+
+  .profil-anlegen input {
+  margin-top: 5px;
+  margin-left: 150px;
+  height: 60%;
+  width: 75%;
+}
   </style>
   
