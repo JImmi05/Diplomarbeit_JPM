@@ -1,5 +1,6 @@
 //signup
-const signupform = document.querySelector('#signup-form');
+const signupform = document.querySelector('signup-form');
+
 signupform.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log('Formular abgesendet!');

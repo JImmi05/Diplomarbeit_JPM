@@ -17,7 +17,7 @@
         <img class="image-2" alt="Image" src="../assets/vetter_kleinförderband.jpg" />
       </div>
       <div class="page-heading">
-        <!--img class="divider" alt="Divider" src="divider.svg" /-->                <!-- brauch es das????-->
+        <img class="divider" alt="Divider" src="divider.svg" />
         <div class="default-chip">
           <div class="text-wrapper-4">Default</div>
         </div>

@@ -31,7 +31,7 @@
         <div class="page-heading">
           <div class="overlap">
             <div class="overlap-group">
-              <!--img class="divider" alt="Divider" src="divider.svg" /-->  <!-- Braucht es das????-->
+              <img class="divider" alt="Divider" src="divider.svg" />
               <div class="frame-wrapper">
                 <div class="div-wrapper">
                   <div class="div-wrapper">
