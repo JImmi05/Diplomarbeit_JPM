@@ -451,5 +451,12 @@
     top: 40px;
     white-space: nowrap;
   }
+
+  .profil-anlegen input {
+  margin-top: 5px;
+  margin-left: 150px;
+  height: 60%;
+  width: 75%;
+}
   </style>
   
