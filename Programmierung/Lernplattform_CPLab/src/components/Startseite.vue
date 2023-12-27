@@ -27,7 +27,7 @@
       </p>
       <img class="img" alt="Image" src="../assets/Bohrstation.png" />
       <button class="button">
-        <router-link to="/profil_erstellen" class="text-wrapper-2">Erste Schritte</router-link>
+        <router-link to="/login" class="text-wrapper-2">Erste Schritte</router-link>
       </button>
       <p class="text-wrapper-3">Lernsystem der digitalen Lernfabrik im WIFI Dornbirn</p>
       <header class="header">

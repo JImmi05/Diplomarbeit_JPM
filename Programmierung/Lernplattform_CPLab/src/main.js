@@ -3,6 +3,7 @@ import Aufträge from './components/Aufträge.vue'
 import Anleitungen from './components/Anleitungen.vue'
 import Profil from './components/Profil.vue'
 import Profil_erstellen from './components/Profil_erstellen.vue'
+import Login_Page from './components/Login.vue'
 import App from './App.vue'
 import {createApp} from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -13,6 +14,8 @@ const routes = [
   {path: '/anleitungen', component: Anleitungen },
   {path: '/profil', component: Profil },
   {path: '/profil_erstellen', component: Profil_erstellen },
+  {path: '/login', component: Login_Page }
+
 ]
 
 const router = createRouter({
