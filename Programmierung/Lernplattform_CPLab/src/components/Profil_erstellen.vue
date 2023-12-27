@@ -1,7 +1,6 @@
 <template>
     <div class="profil-anlegen">
       <div class="div">
-<<<<<<< HEAD
         <form id="signup-form">
           <div class="e-mail">
             <div class="text-wrapper">Passwort:</div>
@@ -23,20 +22,6 @@
             <button type="submit" class="text-wrapper-10">Speichern</button>
           </div>
         </form>
-=======
-        <div class="e-mail">
-          <div class="text-wrapper">Passwort:</div>
-        </div>
-        <div class="div-wrapper">
-          <div class="text-wrapper">E-Mail:</div>
-        </div>
-        <div class="jahrgang">
-          <div class="text-wrapper">Jahrgang:</div>
-        </div>
-        <div class="username">
-          <div class="text-wrapper">Profilname:</div>
-        </div>
->>>>>>> parent of 8a5239c (firebase erstell)
         <div class="summary">
           <div class="text-wrapper-2">n</div>
           <div class="text-wrapper-3">Gesamt</div>
