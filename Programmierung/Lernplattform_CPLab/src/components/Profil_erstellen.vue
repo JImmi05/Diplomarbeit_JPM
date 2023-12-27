@@ -4,7 +4,7 @@
         <form id="signup-form">
           <div class="e-mail">
             <div class="text-wrapper">Passwort:</div>
-            <input type="passwort" id="signup-password">
+            <input type="password" id="signup-password">
           </div>
           <div class="div-wrapper">
             <div class="text-wrapper">E-Mail:</div>
