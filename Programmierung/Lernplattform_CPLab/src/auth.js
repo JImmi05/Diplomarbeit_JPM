@@ -1,17 +1,29 @@
-//signup
-const signupform = document.querySelector('signup-form');
+// Beispiel: Speichern eines Benutzers in Firebase
+const signupForm = document.getElementById('signup-form');
 
-signupform.addEventListener('submit', (e) => {
-    e.preventDefault();
-    console.log('Formular abgesendet!');
+signupForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-    //get user info
-    const email = signupform['signup-email'].value;
-    const password = signupform['signup-password'].value;
-    const profilename = signupform['signup-profilename'].value;
-    const jahrgang = signupform['signup-jahrgang'].value;
+  const email = document.getElementById('signup-email').value;
+  const password = document.getElementById('signup-password').value;
 
-    console.log(email, password, profilename, jahrgang);
+  try {
+    // Erstelle einen Benutzer in Firebase Auth
+    const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+
+    // Zugriff auf Benutzerdaten
+    const user = userCredential.user;
+
+    // Optional: Speichern von zusätzlichen Benutzerinformationen in Firestore
+    await db.collection('users').doc(user.uid).set({
+      email: user.email,
+      jahrgang: document.getElementById('signup-jahrgang').value,
+      profilename: document.getElementById('signup-profilename').value,
+      // Weitere benutzerdefinierte Felder hier hinzufügen...
+    });
+
+    console.log('Benutzer erfolgreich erstellt und gespeichert:', user);
+  } catch (error) {
+    console.error('Fehler bei der Benutzererstellung:', error.message);
+  }
 });
-
-
