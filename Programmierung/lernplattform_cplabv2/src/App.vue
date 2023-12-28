@@ -1,10 +1,12 @@
 <template>
   <nav>
-    <router-link to="/about">About</router-link> |
+    <router-link to="/startseite">Starseite</router-link> |
     <router-link to="/sign-in">Login</router-link> |
     <router-link to="/register">Register</router-link> |
     <router-link to="/feed">Feed</router-link>
   </nav>
+
+  <div class="text-wrapper-9">Lernplattform CPLAB</div>
   <router-view/>
 </template>
 
@@ -28,5 +30,24 @@ nav {
       color: #42b983;
     }
   }
+
+  
 }
+
+
+
+.text-wrapper-9 {
+  color: #426b1f;
+  font-family: "Newsreader-Medium", Helvetica;
+  font-size: 32px;
+  font-weight: 500;
+  left: 96px;
+  letter-spacing: -0.32px;
+  line-height: 32px;
+  position: absolute;
+  top: 40px;
+  white-space: nowrap;
+}
+
+
 </style>
