@@ -1,12 +1,12 @@
 <template>
     <div>
-        Secret
+        Login
     </div>
 </template>
 
 <script>
     export default {
-        
+        name: 'LoginView'
     }
 </script>
 

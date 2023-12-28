@@ -1,12 +1,12 @@
 <template>
     <div>
-        Register
+        Secret
     </div>
 </template>
 
 <script>
     export default {
-        
+        name: 'SecretView'
     }
 </script>
 
