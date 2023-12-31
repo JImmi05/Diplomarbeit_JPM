@@ -1,9 +1,12 @@
 <template>
   <nav>
     <router-link to="/startseite">Starseite</router-link> |
+    <router-link to="/anleitung">Anleitungen</router-link> |
+    <router-link to="/auftraege">Aufträge</router-link> |
     <router-link to="/sign-in">Login</router-link> |
     <router-link to="/register">Register</router-link> |
     <router-link to="/feed">Feed</router-link>
+    
   </nav>
 
   <div class="text-wrapper-9">Lernplattform CPLAB</div>
@@ -33,8 +36,6 @@ nav {
 
   
 }
-
-
 
 .text-wrapper-9 {
   color: #426b1f;
