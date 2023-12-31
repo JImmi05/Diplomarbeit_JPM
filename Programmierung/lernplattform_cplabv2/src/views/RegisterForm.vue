@@ -6,6 +6,7 @@
     <p><input type="password" placeholder="Password" v-model="password" /></p>
     <p><button @click="register">Submit</button></p>
     <p><button @click="signInWithGoogle">Sign In With Google</button></p>
+    <p><button @click="signInWithMicrosoft">Sign In With Microsoft</button></p>
     <p>__________________________________________________________________________________</p>
     <p>You already have an account?</p>
     <p><router-link to="/sign-in">Sign in here</router-link></p>
@@ -14,7 +15,7 @@
 
 <script setup>
  import { ref } from "vue";
- import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+ import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, OAuthProvider } from "firebase/auth";
  import { useRouter } from 'vue-router'
  const email = ref("");
  const password =  ref("");
@@ -44,6 +45,18 @@
       console.log(error.code);
     });
  };
+
+ const signInWithMicrosoft = () => {
+  const provider = new OAuthProvider('microsoft.com');
+  signInWithPopup(getAuth(), provider)
+    .then((result) => {
+      console.log(result.user);
+      router.push('/feed');
+    })
+    .catch((error) => {
+      console.log(error.code);
+    });
+};
 
 </script>
 
