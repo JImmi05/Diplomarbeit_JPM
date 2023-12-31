@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="e-mail">
-          <div class="text-wrapper-8">maxmustermann123</div>
+          <div class="text-wrapper-8">username</div>
           <div class="text-wrapper-9">Passwort:</div>
         </div>
         <div class="e-mail-2">

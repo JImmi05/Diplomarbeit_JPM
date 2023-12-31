@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+//import { getCurrentUser } from 'vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -6,8 +7,26 @@ const router = createRouter({
     { path: "/startseite", component: () => import("../views/Startseite.vue")},
     { path: "/register", component: () => import("../views/RegisterForm.vue")},
     { path: "/sign-in", component: () => import("../views/SignIn.vue")},
-    { path: "/feed", component: () => import("../views/Feed.vue")},
+    { 
+      path: "/feed",
+      component: () => import("../views/Feed.vue"),
+      meta: {
+        requiresAuth: true,
+      },
+    },
   ],
 });
 
-export default router
+//router.beforeEach(async(to, from, next) => {
+//  if (to.matched.some((record) => record.meta.requiresAuth)) {
+//    if (await getCurrentUser()) {
+//      next();
+//    } else {
+//      alert("Du hast keinen Zugriff!")
+//      next("/startseite");
+//    }
+//  } else {
+//    next();
+//  }
+//});
+export default router;
