@@ -20,7 +20,7 @@
  const email = ref("");
  const password =  ref("");
  const name = ref("");
- 
+
  const router = useRouter()
  const register = () => {
     createUserWithEmailAndPassword(getAuth(), email.value, password.value, name.value)
