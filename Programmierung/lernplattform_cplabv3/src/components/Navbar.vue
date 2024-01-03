@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <h1>Vuex Auth</h1>
+    <h1>CPLab-Lernplattform</h1>
     <template v-if="authIsReady">
       <!-- for all users -->
       <div>
@@ -10,7 +10,7 @@
       <div v-if="user">
         <router-link to="/aufträge">Aufträge</router-link>
         <span>Logged in as {{ user.email }}</span>
-        <button @click="handleClick">Logout</button>
+        <button class="button"  @click="handleClick">Logout</button>
       </div>
       <!-- for logged out users -->
       <div v-if="!user">
@@ -43,17 +43,36 @@ export default {
 </script>
 
 <style>
+
+nav{
+  color: #426b1f;
+  font-size: 20px;;
+}
+
+
 .button {
   all: unset;
   background-color: #426b1f;
+  color: white;
   border-radius: 8px;
   box-sizing: border-box;
-  height: 64px;
-  left: 607px;
-  overflow: hidden;
+  padding: 3px;
   position: absolute;
-  top: 250px;
-  width: 227px;
+  cursor: pointer;
+  
 }
+
+button:hover{
+  background-color: #3a5918;;
+}
+
+h1{
+  color: #426b1f;
+  border: 2px solid;
+  border-radius: 8px;
+  padding: 3px;
+}
+
+
 
 </style>
