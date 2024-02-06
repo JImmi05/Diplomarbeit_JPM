@@ -1,15 +1,15 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form @submit.prevent="handleSubmit" class="login-form">
     <h3>Login</h3>
 
     <label for="email">Email:</label>
     <input type="email" name="email" v-model="email" required>
 
-    <label for="email">Password:</label>
+    <label for="password">Password:</label>
     <input type="password" name="password" v-model="password" required>
 
     <button>Login</button>
-    <div v-if="error">{{ error }}</div>
+    <div v-if="error" class="error-message">{{ error }}</div>
   </form>
 </template>
 
@@ -44,3 +44,4 @@ export default {
   }
 }
 </script>
+

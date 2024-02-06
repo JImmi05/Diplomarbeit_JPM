@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <h1>CPLab-Lernplattform</h1>
+    <h1>CP-Lernplattform</h1>
     <template v-if="authIsReady">
       <!-- for all users -->
       <div>
