@@ -70,7 +70,7 @@ export default {
 .aufgaben-seite .div {
   background-color: #ffffff;
   height: 1024px;
-  position: relative;
+  position: absolute;
   width: 1440px;
 }
 
