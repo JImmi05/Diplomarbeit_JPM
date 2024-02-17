@@ -13,6 +13,7 @@
   </form>
 </template>
 
+
 <script>
 import { ref } from 'vue'
 import { useStore } from 'vuex'
@@ -44,4 +45,31 @@ export default {
   }
 }
 </script>
+
+<style>
+form h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+.label{
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+input{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+</style>
 
