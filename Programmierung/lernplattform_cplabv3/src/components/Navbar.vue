@@ -6,9 +6,12 @@
       <div>
         <router-link to="/">Home</router-link>
       </div>
+      <div>
+        <router-link to="/anleitungen">Anleitung</router-link>
+      </div>
       <!-- for logged in users -->
       <div v-if="user">
-        <router-link to="/aufträge">Aufträge</router-link>
+        <router-link to="/aufgaben">Aufgaben</router-link>
         <span>Logged in as {{ user.email }}</span>
         <button class="button"  @click="handleClick">Logout</button>
       </div>
@@ -41,38 +44,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-nav{
-  color: #426b1f;
-  font-size: 20px;;
-}
-
-
-.button {
-  all: unset;
-  background-color: #426b1f;
-  color: white;
-  border-radius: 8px;
-  box-sizing: border-box;
-  padding: 3px;
-  position: absolute;
-  cursor: pointer;
-  
-}
-
-button:hover{
-  background-color: #3a5918;;
-}
-
-h1{
-  color: #426b1f;
-  border: 2px solid;
-  border-radius: 8px;
-  padding: 3px;
-}
-
-
-
-</style>

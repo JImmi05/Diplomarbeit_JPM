@@ -55,7 +55,7 @@
 .startseite .div {
   background-color: #ffffff;
   height: 2092px;
-  position: relative;
+  position: absolute;
   width: 1440px;
 }
 
