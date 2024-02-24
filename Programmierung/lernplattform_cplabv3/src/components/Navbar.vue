@@ -27,13 +27,16 @@
 <script>
 import { useStore } from 'vuex'
 import { computed } from 'vue'
+import { useRouter} from 'vue-router'
 
 export default {
   setup() {
     const store = useStore()
+    const router = useRouter()
 
     const handleClick = () => {
       store.dispatch('logout')
+      router.push('/')
     }
 
     return {
@@ -43,4 +46,6 @@ export default {
     }
   }
 }
+
+
 </script>
