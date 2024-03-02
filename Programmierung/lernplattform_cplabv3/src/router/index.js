@@ -8,8 +8,12 @@ import Installation_des_Förderbandes from '../views/IdF.vue'
 import Installation_der_Bohrstation from '../views/IdB.vue'
 import Installation_der_Buschen from '../views/IdBu.vue'
 import Aufgabe_zum_Förderband from '../views/AzF.vue'
+import Aufgabe_zum_Förderband2 from '../views/AzF2.vue'
+import Aufgabe_zum_Förderband3 from '../views/AzF3.vue'
+import Aufgabe_zum_Förderband4 from '../views/AzF4.vue'
 import Aufgabe_zum_Sensor from '../views/AzS.vue'
 import Aufgabe_zur_Bohrstation from '../views/AzB.vue'
+
 
 const routes = [
   {
@@ -66,6 +70,21 @@ const routes = [
     path: '/AzB',
     name: 'AzB',
     component: Aufgabe_zur_Bohrstation
+  },
+  {
+    path: '/AzF2',
+    name: 'AzF2',
+    component: Aufgabe_zum_Förderband2
+  },
+  {
+    path: '/AzF3',
+    name: 'AzF3',
+    component: Aufgabe_zum_Förderband3
+  },
+  {
+    path: '/AzF4',
+    name: 'AzF4',
+    component: Aufgabe_zum_Förderband4
   }
 ]
 

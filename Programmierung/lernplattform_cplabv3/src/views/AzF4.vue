@@ -2,13 +2,13 @@
     <div class="news">
       <div class="div">
         <div class="aufgabe">
-          <div> Aufgabenfortschritt: {{ AufgabenState }}%</div>
+          <div> Aufgabenfortschritt: {{ AufgabenState}}% </div>
           <div class="text-wrapper-2">Letzte Aktualisierung: 17.02.2024</div>
           <button class="button1"    @click="handleClick" > Zurück </button>
-          <button class="button2"    @click="handleClick2" > Weiter </button>
+          <button class="button2"    @click="handleClick2" > Fertig </button>
           <div class="overlap">
             <p class="p">
-              Schritt 1: Standortauswahl Vor Beginn der Installation wird der ideale Standort für das Förderband im Lagerhaus ausgewählt. Der Standort wird basierend auf der effizienten Bewegung von Waren, Zugänglichkeit für Arbeitskräfte und zukünftigen Lagererweiterungen festgelegt.
+              Schritt 4: Fertig machen!
             </p>
             <img class="image" alt="Image" src="../assets/vetter_kleinförderband.jpg" />
           </div>
@@ -33,22 +33,24 @@
   </template>
   
   <script>
-  import { useRouter} from 'vue-router'
+  import { useRouter } from 'vue-router'
   import { useStore } from 'vuex'
   import { computed } from 'vue'
 
+
 export default {
   setup() {
-    const router = useRouter();
-    const store = useStore();
+    const router = useRouter()
+    const store = useStore()
 
-    const handleClick = () => {   
-      router.push('/Aufgaben')        
+    const handleClick = () => {
+      store.dispatch('setAufgabenState', 50);   
+      router.push('/AzF3')        
     }
 
-    const handleClick2 = () => {   
-      store.dispatch('setAufgabenState', 25);
-      router.push('/AzF2')
+    const handleClick2 = () => {
+      store.dispatch('setAufgabenState', 100);   
+      router.push('/Aufgaben')        
     }
 
     const AufgabenState = computed(() => {

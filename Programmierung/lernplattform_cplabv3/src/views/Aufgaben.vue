@@ -26,9 +26,10 @@
         <div class="text-wrapper-12">Bohrstation</div>
         <img class="img" alt="Fkphulv m" src="../assets/Bohrstation.png" />
       </div></router-link>
-      <router-link to="/AzF"><div class="aufgabe-3">
+      <router-link  @click="handleClick" to="/AzF"><div class="aufgabe-3">
         <p class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...</p>
         <div class="text-wrapper-11">Aufwand: ca. 3h</div>
+        <div class="aufgaben-state">Aufgabenfortschritt: {{ AufgabenState }}% </div>
         <div class="text-wrapper-12">Förderband</div>
         <img class="img" alt="Ed o neil" src="../assets/vetter_kleinförderband.jpg" />
       </div></router-link>
@@ -46,8 +47,27 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
 export default {
-  name: "AufgabenSeite",
+  setup(){
+    const store = useStore();
+
+    const handleClick = () => {
+      store.dispatch('setAufgabenState', 0);   
+    }
+
+    const AufgabenState = computed(() => {
+      return store.getters.currentAufgabenState;
+    })
+
+    return{
+      handleClick,
+      AufgabenState
+    };
+  }
+
 };
 </script>
 
@@ -265,6 +285,19 @@ export default {
   white-space: nowrap;
 }
 
+.aufgaben-seite .aufgaben-state {
+  color: #1fff01;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 20px;
+  font-weight: 800;
+  left: 184px;
+  letter-spacing: 0;
+  line-height: 26px;
+  position: absolute;
+  top: 0px;
+  white-space: nowrap;
+}
+
 .aufgaben-seite .img {
   height: 159px;
   left: 0;
@@ -341,4 +374,10 @@ export default {
   white-space: nowrap;
   width: fit-content;
 }
+
+.aufgaben-seite .aufgabe-3 .Aufgaben-state{
+  left: 0px;
+  top: 100px;
+}
+
 </style>
