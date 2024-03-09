@@ -1,71 +1,59 @@
 <template>
-    <div class="news">
-      <div class="div">
-        <div class="aufgabe">
-          <div> Aufgabenfortschritt: {{ AufgabenState }}%</div>
-          <div class="text-wrapper-2">Letzte Aktualisierung: 17.02.2024</div>
-          <button class="button1"    @click="handleClick" > Zurück </button>
-          <button class="button2"    @click="handleClick2" > Weiter </button>
-          <div class="overlap">
-            <p class="p">
-              Schritt 1: Standortauswahl Vor Beginn der Installation wird der ideale Standort für das Förderband im Lagerhaus ausgewählt. Der Standort wird basierend auf der effizienten Bewegung von Waren, Zugänglichkeit für Arbeitskräfte und zukünftigen Lagererweiterungen festgelegt.
-            </p>
-            <img class="image" alt="Image" src="../assets/vetter_kleinförderband.jpg" />
-          </div>
-          <div class="overlap-group">
-            <p class="p">
-              Schritt 1: Standortauswahl Vor Beginn der Installation wird der ideale Standort für das Förderband im Lagerhaus ausgewählt. Der Standort wird basierend auf der effizienten Bewegung von Waren, Zugänglichkeit für Arbeitskräfte und zukünftigen Lagererweiterungen festgelegt.
-            </p>
-            <img class="img" alt="Image" src="../assets/vetter_kleinförderband.jpg" />
-          </div>
-        </div>
-        <div class="page-heading">
-          <div class="frame">
+  <div class="news">
+    <div class="div">
+      <div class="aufgabe">
+        <div> Aufgabenfortschritt des Benutzers: {{ userProgress }}%</div>
+        <div class="text-wrapper-2">Letzte Aktualisierung: 17.02.2024</div>
+        <button class="button1" @click="handleClick"> Zurück </button>
+        <button class="button2" @click="handleClick2"> Weiter </button>
+        <!-- Weitere Inhalte hier -->
+      </div>
+      <div class="page-heading">
+        <div class="frame">
+          <div class="div-wrapper">
             <div class="div-wrapper">
-              <div class="div-wrapper">
-                <div class="text-wrapper-3">Aufgaben zum Förderband</div>
-              </div>
+              <div class="text-wrapper-3">Aufgaben zum Förderband</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  import { useRouter} from 'vue-router'
-  import { useStore } from 'vuex'
-  import { computed } from 'vue'
+  </div>
+</template>
+
+<script>
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 
 export default {
   setup() {
-    const router = useRouter();
-    const store = useStore();
+    const router = useRouter()
+    const store = useStore()
 
-    const handleClick = () => {   
-      router.push('/Aufgaben')        
+    const handleClick = () => {
+      store.dispatch('decreaseProgress');
+      router.push('/Aufgaben')
     }
 
-    const handleClick2 = () => {   
-      store.dispatch('setAufgabenState', 25);
+    const handleClick2 = () => {
+      store.dispatch('updateProgress');      
       router.push('/AzF2')
     }
 
-    const AufgabenState = computed(() => {
-      return store.getters.currentAufgabenState;
+    // Fortschritt des angemeldeten Benutzers aus dem Store abrufen
+    const userProgress = computed(() => {
+      return store.state.progress
     })
-
 
     return {
       handleClick,
       handleClick2,
-      AufgabenState
+      userProgress
     }
   }
 }
-
-
-  </script>
+</script>
   
   <style>
   .news {

@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
 
 // firebase Importe
 import { auth } from '../firebase/config'
@@ -13,7 +14,7 @@ const store = createStore({
   state: {
     user: null,
     authIsReady: false,
-    aufgabenState: 0,
+    progress: 0,
     userUID: null // Hinzufügen der Benutzer-UID im Store-Zustand
   },
   mutations: {
@@ -28,19 +29,28 @@ const store = createStore({
     setAuthIsReady(state, payload) {
       state.authIsReady = payload;
     },
-    setAufgabenState(state, payload) {
-      state.aufgabenState = payload;
+    setProgress(state, payload) {
+      state.progress = payload;
+      console.log('Fortschritt im Vuex-Store aktualisiert:', payload);
     }
   },
   actions: {
     async signup(context, { email, password }) {
       console.log('signup action');
 
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      if (res) {
-        context.commit('setUser', res.user);
-        context.commit('setUserUID', res.user.uid); // Setzen der Benutzer-UID im Store
-      } else {
+      try {
+        const authRes = await createUserWithEmailAndPassword(auth, email, password);
+        const user = authRes.user;
+    
+        // Benutzerdaten in Firestore speichern
+        const db = getFirestore();
+        const userDocRef = doc(db, 'users', user.uid);
+        await setDoc(userDocRef, { progress: null }); // Hier kannst du weitere Daten hinzufügen
+    
+        // Benutzerdaten im Store aktualisieren
+        context.commit('setUser', user);
+        context.commit('setUserUID', user.uid);
+      } catch (error) {
         throw new Error('could not complete signup');
       }
     },
@@ -60,23 +70,66 @@ const store = createStore({
       console.log('logout action');
 
       await signOut(auth);
+
       context.commit('setUser', null);
       context.commit('setUserUID', null); // Zurücksetzen der Benutzer-UID im Store
     },
-    setAufgabenState({ commit }, payload) {
-      console.log('aufgabenState action');
+    setProgress({ commit }, payload) {
+      console.log('setProgress action');
 
-      commit('setAufgabenState', payload);
+      commit('setProgress', payload);
+    },
+    async initializeProgress({ state, commit }) {
+      try {
+        if (state.userUID) {
+          const db = getFirestore();
+          const userDocRef = doc(db, 'users', state.userUID);
+          const docSnap = await getDoc(userDocRef);
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
+            commit('setProgress', userData.progress || 0);
+          } else {
+            // Benutzerdokument existiert nicht, initialisiere Fortschritt mit 0
+            commit('setProgress', 0);
+          }
+        }
+      } catch (error) {
+        console.error('Error initializing progress:', error);
+      }
+    },
+    async updateProgress({ state, commit }) {
+      try {
+        const newProgress = state.progress + 25;
+        const db = getFirestore();
+        if (state.userUID) {
+          const userUID = state.userUID;
+          const userDocRef = doc(db, 'users', userUID);
+          await updateDoc(userDocRef, { progress: newProgress });
+          commit('setProgress', newProgress);
+        }
+      } catch (error) {
+        console.error('Error updating progress:', error);
+      }
+    },
+    async decreaseProgress({ state, commit }) {
+      try {
+        const newProgress = Math.max(0, state.progress - 25); // Ensure progress does not go below 0
+        const db = getFirestore();
+        if (state.userUID) {
+          const userUID = state.userUID;
+          const userDocRef = doc(db, 'users', userUID);
+          await updateDoc(userDocRef, { progress: newProgress });
+          commit('setProgress', newProgress);
+        }
+      } catch (error) {
+        console.error('Error decreasing progress:', error);
+      }
     }
   },
   getters: {
-    currentAufgabenState: state => {
-      return state.aufgabenState;
-    },
-    currentUserUID: state => state.userUID // Getter, um auf die Benutzer-UID zuzugreifen
+    currentProgress: state => state.progress
   }
 });
-
 
 // Die Funktion onAuthStateChanged wird aufgerufen, um den Authentifizierungsstatus zu überwachen
 // Sie nimmt zwei Argumente entgegen: das Authentifizierungsobjekt (auth) und eine Callback-Funktion,
@@ -95,7 +148,6 @@ const unsub = onAuthStateChanged(auth, (user) => {
   // wenn "auth" sich ändert
   unsub()
 })
-
 
 // export the store
 export default store

@@ -7,6 +7,8 @@ import { getAuth } from 'firebase/auth'      /*getAuth: Ist die Funktion die ver
                                                         Backend verknüpfen können
                                                         */
 
+import { getFirestore } from 'firebase/firestore'
+
 const firebaseConfig = {                              
   apiKey: "AIzaSyDAkEz_C-uRid4xznChepeSg5FTP5dT_-M",
   authDomain: "vue-auth-da.firebaseapp.com",
@@ -17,11 +19,13 @@ const firebaseConfig = {
 }
 
 // firebase initalisieren
-initializeApp(firebaseConfig)
+const firebaseApp = initializeApp(firebaseConfig);
 
 // firebase authorization initialisieren
-const auth = getAuth()
+const auth = getAuth(firebaseApp);
+
+const db = getFirestore(firebaseApp);
 
 // Objekt exportieren damit es in einer anderen Datei verwendet werden kann
-export { auth }
+export { auth, db }
 

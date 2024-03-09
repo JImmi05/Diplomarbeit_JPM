@@ -15,7 +15,7 @@
 
 <script>
 //Importe
-import { ref} from 'vue'
+import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
@@ -41,6 +41,11 @@ export default {
         error.value = err.message // Festlegung des Fehlerwerts bei einem Fehler während der Registrierung
       }
     }
+
+  
+
+    
+    
   // Rückgabe der erforderlichen Werte und Funktionen für die Verwendung im Template 
   //(unter anderem damit der Error auf der Website ausgegeben werden kann)
     return { handleSubmit, email, password, error }

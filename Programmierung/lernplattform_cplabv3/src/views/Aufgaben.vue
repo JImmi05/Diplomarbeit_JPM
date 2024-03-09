@@ -14,25 +14,25 @@
           <div class="text-wrapper-9">Aufgaben</div>
         </div>
       </div>
-      <router-link to="/AzS"><div class="aufgabe">
-        <div class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...</div>
-        <div class="text-wrapper-11">Aufwand: ca. 3h</div>
-        <div class="text-wrapper-12">Sensoren des Förderbands</div>
-        <img class="img" alt="Noonbrew ekmak" src="../assets/Sensoren.png" />
-      </div></router-link>
-      <router-link to="/AzB"><div class="aufgabe-2">
-        <div class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...In dieser kurzen Aufgabe werden die Grundfunktionen...</div>
-        <div class="text-wrapper-11">Aufwand: ca. 3h</div>
-        <div class="text-wrapper-12">Bohrstation</div>
-        <img class="img" alt="Fkphulv m" src="../assets/Bohrstation.png" />
-      </div></router-link>
-      <router-link  @click="handleClick" to="/AzF"><div class="aufgabe-3">
-        <p class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...</p>
-        <div class="text-wrapper-11">Aufwand: ca. 3h</div>
-        <div class="aufgaben-state">Aufgabenfortschritt: {{ AufgabenState }}% </div>
-        <div class="text-wrapper-12">Förderband</div>
-        <img class="img" alt="Ed o neil" src="../assets/vetter_kleinförderband.jpg" />
-      </div></router-link>
+        <router-link to="/AzS"><div class="aufgabe">
+          <div class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...</div>
+          <div class="text-wrapper-11">Aufwand: ca. 3h</div>
+          <div class="text-wrapper-12">Sensoren des Förderbands</div>
+          <img class="img" alt="Noonbrew ekmak" src="../assets/Sensoren.png" />
+        </div></router-link>
+        <router-link to="/AzB"><div class="aufgabe-2">
+          <div class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...In dieser kurzen Aufgabe werden die Grundfunktionen...</div>
+          <div class="text-wrapper-11">Aufwand: ca. 3h</div>
+          <div class="text-wrapper-12">Bohrstation</div>
+          <img class="img" alt="Fkphulv m" src="../assets/Bohrstation.png" />
+        </div></router-link>
+        <router-link to="AzF"><div class="aufgabe-3">
+          <p class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...</p>
+          <div class="text-wrapper-11">Aufwand: ca. 3h</div>
+          <div class="aufgaben-state">Aufgabenfortschritt: {{ userProgress }}% </div>
+          <div class="text-wrapper-12">Förderband</div>
+          <img class="img" alt="Ed o neil" src="../assets/vetter_kleinförderband.jpg" />
+        </div></router-link>
       <div class="page-heading">
         <div class="frame-wrapper">
           <div class="div-wrapper">
@@ -47,24 +47,33 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
+
 
 export default {
   setup(){
     const store = useStore();
+    const user = computed(() => store.state.user)
 
-    const handleClick = () => {
-      store.dispatch('setAufgabenState', 0);   
-    }
 
-    const AufgabenState = computed(() => {
-      return store.getters.currentAufgabenState;
+    const userProgress = computed(() => {
+      return store.state.progress;
     })
 
+
+     onMounted(async () => {
+      if (user.value) {
+        await store.dispatch('initializeProgress');
+      }
+    });
+
+    
+
+   
+
     return{
-      handleClick,
-      AufgabenState
+      userProgress
     };
   }
 
