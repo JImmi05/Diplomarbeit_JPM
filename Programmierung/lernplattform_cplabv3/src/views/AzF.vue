@@ -32,12 +32,12 @@ export default {
     const store = useStore()
 
     const handleClick = () => {
-      store.dispatch('decreaseProgress');
+      store.dispatch('decreaseTaskProgress');
       router.push('/Aufgaben')
     }
 
     const handleClick2 = () => {
-      store.dispatch('updateProgress');      
+      store.dispatch('increaseTaskProgress');      
       router.push('/AzF2')
     }
 

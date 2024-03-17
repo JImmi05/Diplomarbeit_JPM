@@ -13,6 +13,7 @@ import Aufgabe_zum_Förderband3 from '../views/AzF3.vue'
 import Aufgabe_zum_Förderband4 from '../views/AzF4.vue'
 import Aufgabe_zum_Sensor from '../views/AzS.vue'
 import Aufgabe_zur_Bohrstation from '../views/AzB.vue'
+import store from '../store';
 
 
 const routes = [
@@ -85,6 +86,24 @@ const routes = [
     path: '/AzF4',
     name: 'AzF4',
     component: Aufgabe_zum_Förderband4
+  },
+  {
+    path: '/aufgaben',
+    component: () => {
+      const userProgress = store.state.progress;
+      if (userProgress === 25) {
+        return import('../views/AzF2.vue');
+      } else if (userProgress === 50) {
+        return import('../views/AzF3.vue');
+      } else if (userProgress === 75) {
+        return import('../views/AzF4.vue');
+      } else if (userProgress !== 100) {
+        return import('../views/AzF2.vue');
+      }
+      else {
+        return import('../views/AzF.vue')
+      }
+    }
   }
 ]
 

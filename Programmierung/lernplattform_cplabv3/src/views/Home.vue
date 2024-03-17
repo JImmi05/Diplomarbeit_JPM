@@ -36,11 +36,21 @@
 
 
 <script>
-  export default {
-    name: 'StartseiteView'
+import { computed, onMounted } from 'vue';
+import { useStore } from 'vuex';
+
+export default {
+  setup() {
+    const store = useStore();
+    const user = computed(() => store.state.user)
+
+    onMounted(async () => {
+      if (user.value) {
+        await store.dispatch('fetchTasks');
+      }
+    });
   }
-
-
+}
 </script>
 
 <style>

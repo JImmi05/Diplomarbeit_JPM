@@ -35,6 +35,7 @@ export default {
           password: password.value
         })
         router.push('/')
+        
       }
       catch (err) {
         error.value = err.message
