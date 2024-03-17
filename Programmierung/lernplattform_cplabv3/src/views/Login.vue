@@ -15,7 +15,7 @@
 
 
 <script>
-import { ref } from 'vue'
+import { ref} from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
@@ -40,6 +40,8 @@ export default {
         error.value = err.message
       }
     }
+
+    
 
     return { handleSubmit, email, password, error }
   }

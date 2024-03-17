@@ -31,14 +31,15 @@ export default {
     const router = useRouter()
     const store = useStore()
 
+
     const handleClick = () => {
       store.dispatch('decreaseProgress');
-      router.push('/Aufgaben')
+      router.push('/AzF3')
     }
 
     const handleClick2 = () => {
       store.dispatch('updateProgress');      
-      router.push('/AzF2')
+      router.push('/Aufgaben')
     }
 
     // Fortschritt des angemeldeten Benutzers aus dem Store abrufen

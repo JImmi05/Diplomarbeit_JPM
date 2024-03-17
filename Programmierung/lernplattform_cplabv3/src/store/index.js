@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
 
 // firebase Importe
 import { auth } from '../firebase/config'
@@ -9,62 +10,126 @@ import {
   onAuthStateChanged
 } from 'firebase/auth'
 
-const store = createStore({   //Hier wird der Authentifizierungsspeicher angelegt
-  state: {                    //state:  verfolgt den Status des Users
-    user: null,               /*dieser wird am Anfang auf null gestzt. Das heißt der User 
-                              ist nicht angemeldet*/
-    authIsReady: false        //Bis wir wissen ob der User ein oder ausgeloggt ist die Authentifizierung nicht bereit
+const store = createStore({
+  state: {
+    user: null,
+    authIsReady: false,
+    progress: 0,
+    userUID: null // Hinzufügen der Benutzer-UID im Store-Zustand
   },
-  mutations: {                    //mutations: wird verwendet um etwas zu updaten
-    setUser(state, payload) {     /*payload: wenn eingeloggt: ist das User-Objekt. Dieses 
-                                    beiinhaltet alle Daten des users (Email, Passwort,etc.)
-                                             wenn ausgeloggt: beträgt null*/
-      state.user = payload        //Setzt den Benutzerzustand auf die übergebene Payload
-      console.log('user state changed:', state.user)
+  mutations: {
+    setUser(state, payload) {
+      state.user = payload;
+      console.log('user state changed:', state.user);
     },
-    setAuthIsReady(state, payload) {  /* in diesem Fall ist die payload true oder false
-                                      da es nur aufgerufen wird wenn die Authentifizierung bereit ist, ist es immer true*/
-      state.authIsReady = payload     
+    setUserUID(state, uid) { // Mutation zur Aktualisierung der Benutzer-UID
+      state.userUID = uid;
+      console.log('User UID set to:', uid);
+    },
+    setAuthIsReady(state, payload) {
+      state.authIsReady = payload;
+    },
+    setProgress(state, payload) {
+      state.progress = payload;
+      console.log('Fortschritt im Vuex-Store aktualisiert:', payload);
     }
   },
   actions: {
-    async signup(context, { email, password }) { //Definition der Aktion "signup"
-                                                 /*context: Ist ein Objekt das verschieden Methoden
-                                                            und Eigenschaften enthält die benötigt werden*/
-      console.log('signup action')
+    async signup(context, { email, password }) {
+      console.log('signup action');
 
-      // Versuche, einen Benutzer mit der bereitgestellten E-Mail und dem Passwort zu registrieren
-      // await: warte bis die Funktion fertig ist befor du im code weitergehst
-      // hat es funktioniert wird email und passwort in 'res' gespeichert, sonst ist 'res' leer
-      const res = await createUserWithEmailAndPassword(auth, email, password)
-
-      // Überprüfe, ob die Registrierung erfolgreich war (ob 'res' einen Wert enthält)
-      if (res) {
-        // Wenn die Registrierung erfolgreich war, aktualisiere den Benutzer im Vuex-Store
-        context.commit('setUser', res.user) // Aktualisiere den Benutzer im Store mit den Benutzerdaten aus der Antwort
-      } else {
-        // Wenn die Registrierung fehlschlägt, wirf einen Fehler mit einer entsprechenden Fehlermeldung
-        throw new Error('could not complete signup')
+      try {
+        const authRes = await createUserWithEmailAndPassword(auth, email, password);
+        const user = authRes.user;
+    
+        // Benutzerdaten in Firestore speichern
+        const db = getFirestore();
+        const userDocRef = doc(db, 'users', user.uid);
+        await setDoc(userDocRef, { progress: null }); // Hier kannst du weitere Daten hinzufügen
+    
+        // Benutzerdaten im Store aktualisieren
+        context.commit('setUser', user);
+        context.commit('setUserUID', user.uid);
+      } catch (error) {
+        throw new Error('could not complete signup');
       }
     },
     async login(context, { email, password }) {
-      console.log('login action')
+      console.log('login action', email);
 
-      const res = await signInWithEmailAndPassword(auth, email, password)
+      const res = await signInWithEmailAndPassword(auth, email, password);
       if (res) {
-        context.commit('setUser', res.user)
+        context.commit('setUser', res.user);
+        context.commit('setUserUID', res.user.uid); // Setzen der Benutzer-UID im Store
       } else {
-        throw new Error('could not complete login')
+        throw new Error('could not complete login');
       }
+      
     },
     async logout(context) {
-      console.log('logout action')
- 
-      await signOut(auth)               // logout Funktion (benötigt nur auth)
-      context.commit('setUser', null)   // Aktualisiere den Benutzer im Store mit null
+      console.log('logout action');
+
+      await signOut(auth);
+
+      context.commit('setUser', null);
+      context.commit('setUserUID', null); // Zurücksetzen der Benutzer-UID im Store
+    },
+    setProgress({ commit }, payload) {
+      console.log('setProgress action');
+
+      commit('setProgress', payload);
+    },
+    async initializeProgress({ state, commit }) {
+      try {
+        if (state.userUID) {
+          const db = getFirestore();
+          const userDocRef = doc(db, 'users', state.userUID);
+          const docSnap = await getDoc(userDocRef);
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
+            commit('setProgress', userData.progress || 0);
+          } else {
+            // Benutzerdokument existiert nicht, initialisiere Fortschritt mit 0
+            commit('setProgress', 0);
+          }
+        }
+      } catch (error) {
+        console.error('Error initializing progress:', error);
+      }
+    },
+    async updateProgress({ state, commit }) {
+      try {
+        const newProgress = state.progress + 25;
+        const db = getFirestore();
+        if (state.userUID) {
+          const userUID = state.userUID;
+          const userDocRef = doc(db, 'users', userUID);
+          await updateDoc(userDocRef, { progress: newProgress });
+          commit('setProgress', newProgress);
+        }
+      } catch (error) {
+        console.error('Error updating progress:', error);
+      }
+    },
+    async decreaseProgress({ state, commit }) {
+      try {
+        const newProgress = Math.max(0, state.progress - 25); // Ensure progress does not go below 0
+        const db = getFirestore();
+        if (state.userUID) {
+          const userUID = state.userUID;
+          const userDocRef = doc(db, 'users', userUID);
+          await updateDoc(userDocRef, { progress: newProgress });
+          commit('setProgress', newProgress);
+        }
+      } catch (error) {
+        console.error('Error decreasing progress:', error);
+      }
     }
+  },
+  getters: {
+    currentProgress: state => state.progress
   }
-})
+});
 
 // Die Funktion onAuthStateChanged wird aufgerufen, um den Authentifizierungsstatus zu überwachen
 // Sie nimmt zwei Argumente entgegen: das Authentifizierungsobjekt (auth) und eine Callback-Funktion,
@@ -83,7 +148,6 @@ const unsub = onAuthStateChanged(auth, (user) => {
   // wenn "auth" sich ändert
   unsub()
 })
-
 
 // export the store
 export default store
