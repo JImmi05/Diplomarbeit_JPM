@@ -1,39 +1,60 @@
 <template>
-    <div class="news">
-      <div class="div">
-        <div class="aufgabe">
-          <div class="text-wrapper-2">Letzte Aktualisierung: 17.02.2024</div>
-          <div class="overlap">
-            <p class="p">
-              Schritt 1: Standortauswahl Vor Beginn der Installation wird der ideale Standort für das Förderband im Lagerhaus ausgewählt. Der Standort wird basierend auf der effizienten Bewegung von Waren, Zugänglichkeit für Arbeitskräfte und zukünftigen Lagererweiterungen festgelegt.
-            </p>
-            <img class="image" alt="Image" src="../assets/Sensoren.png" />
-          </div>
-          <div class="overlap-group">
-            <p class="p">
-              Schritt 1: Standortauswahl Vor Beginn der Installation wird der ideale Standort für das Förderband im Lagerhaus ausgewählt. Der Standort wird basierend auf der effizienten Bewegung von Waren, Zugänglichkeit für Arbeitskräfte und zukünftigen Lagererweiterungen festgelegt.
-            </p>
-            <img class="img" alt="Image" src="../assets/Sensoren.png" />
-          </div>
-        </div>
-        <div class="page-heading">
-          <div class="frame">
+  <div class="news">
+    <div class="div">
+      <div class="aufgabe">
+        <div> Aufgabenfortschritt des Benutzers: {{ getTaskProgressById('Tc2x5jpYgHw9Ln4qKsF6') }}%</div>
+        <div class="text-wrapper-2">Letzte Aktualisierung: 17.02.2024</div>
+        <button class="button1" @click="handleClick"> Zurück </button>
+        <button class="button2" @click="handleClick2"> Weiter </button>
+        <!-- Weitere Inhalte hier -->
+      </div>
+      <div class="page-heading">
+        <div class="frame">
+          <div class="div-wrapper">
             <div class="div-wrapper">
-              <div class="div-wrapper">
-                <div class="text-wrapper-3">Aufgaben zum Sensor</div>
-              </div>
+              <div class="text-wrapper-3">Aufgabe Komplett</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    name: "News",
-  };
-  </script>
+  </div>
+</template>
+
+<script>
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import { computed } from 'vue'
+
+export default {
+  setup() {
+    const router = useRouter()
+    const store = useStore()
+
+    // Fortschritt des angemeldeten Benutzers aus dem Store abrufen
+    const getTaskProgressById = computed(() => {
+      return store.getters.getTaskProgressById;
+    });
+
+    const handleClick = () => {
+      store.dispatch('decreaseTask5Progress');
+      router.push('/Aufgaben')
+    }
+
+    const handleClick2 = () => {
+      store.dispatch('increaseTask5Progress');      
+      router.push('/AK2')
+    }
+
+
+    return {
+      handleClick,
+      handleClick2,
+      getTaskProgressById
+    }
+  }
+}
+</script>
   
   <style>
   .news {
@@ -78,24 +99,24 @@
     white-space: nowrap;
   }
   
-  .news .text-wrapper-2 {
+  .news .div .text-wrapper-2 {
     color: #000000;
     font-family: "Inter-SemiBold", Helvetica;
     font-size: 20px;
     font-weight: 600;
-    left: 39px;
+    left: 40px;
     letter-spacing: 0;
     line-height: 26px;
     position: absolute;
-    top: 22px;
+    top: 65px;
     width: 849px;
   }
   
-  .news .overlap {
+  .news .div .overlap {
     height: 680px;
-    left: 42px;
+    left: 40px;
     position: absolute;
-    top: 70px;
+    top: 90px;
     width: 1183px;
   }
   
@@ -108,7 +129,7 @@
     letter-spacing: 0;
     line-height: 26px;
     position: absolute;
-    top: 0;
+    top: 22;
     width: 1183px;
   }
   
@@ -178,6 +199,24 @@
     position: relative;
     white-space: nowrap;
     width: fit-content;
+  }
+
+  .news .button1{
+    position: absolute;
+    left: 22px;
+    top: 22px;
+    width: 70px;
+    height: 40px;
+    border-radius: 24px;
+  }
+
+  .news .button2{
+    position: absolute;
+    right: 22px;
+    top: 22px;
+    width: 70px;
+    height: 40px;
+    border-radius: 24px;
   }
   
   </style>

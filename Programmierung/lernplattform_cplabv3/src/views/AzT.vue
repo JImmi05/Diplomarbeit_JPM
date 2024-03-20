@@ -2,7 +2,7 @@
   <div class="news">
     <div class="div">
       <div class="aufgabe">
-        <div> Aufgabenfortschritt des Benutzers: {{ getTaskProgressById('P3n7qsRGyJt5wm2aKbW8') }}%</div>
+        <div> Aufgabenfortschritt des Benutzers: {{ getTaskProgressById('E7jR9ufXzLp5ah2qKbW3') }}%</div>
         <div class="text-wrapper-2">Letzte Aktualisierung: 17.02.2024</div>
         <button class="button1" @click="handleClick"> Zurück </button>
         <button class="button2" @click="handleClick2"> Weiter </button>
@@ -12,7 +12,7 @@
         <div class="frame">
           <div class="div-wrapper">
             <div class="div-wrapper">
-              <div class="text-wrapper-3">Aufgaben zur Bohrstation</div>
+              <div class="text-wrapper-3">Aufgabe zur Theorie</div>
             </div>
           </div>
         </div>
@@ -37,13 +37,13 @@ export default {
     });
 
     const handleClick = () => {
-      store.dispatch('decreaseTask4Progress');
+      store.dispatch('decreaseTask1Progress');
       router.push('/Aufgaben')
     }
 
     const handleClick2 = () => {
-      store.dispatch('increaseTask4Progress');      
-      router.push('/AzB2')
+      store.dispatch('increaseTask1Progress');      
+      router.push('/AzT2')
     }
 
 

@@ -38,12 +38,12 @@ export default {
 
     const handleClick = () => {
       store.dispatch('decreaseTask4Progress');
-      router.push('/Aufgaben')
+      router.push('/AzB2')
     }
 
     const handleClick2 = () => {
       store.dispatch('increaseTask4Progress');      
-      router.push('/AzB2')
+      router.push('/AzB4')
     }
 
 

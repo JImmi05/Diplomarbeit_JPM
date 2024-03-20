@@ -14,33 +14,57 @@
           <div class="text-wrapper-9">Aufgaben</div>
         </div>
       </div>
-      <router-link to="/AzS">
-        <div class="aufgabe">
+        <router-link :to="getAufgabenRoute()">
+        <div class="aufgabe-3">
           <div class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...</div>
           <div class="text-wrapper-11">Aufwand: ca. 3h</div>
-          <div class="text-wrapper-12">Sensoren des Förderbands</div>
+          <div class="text-wrapper-12">Theorie der Komponenten</div>
+          <button class="resetButton" v-if="isTask1Completed" @click="resetTask1Progress">Aufgabe erneut machen</button>
           <img class="img" alt="Noonbrew ekmak" src="../assets/Sensoren.png" />
-          <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('lxVU2fcaohPvohtk4fOx') }}% </div>
+          <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('E7jR9ufXzLp5ah2qKbW3') }}% </div>
         </div>
       </router-link>
-      <router-link to="/AzB">
+      <router-link :to="getAufgabenRoute2()">
+        <div class="aufgabe">
+          <p class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...</p>
+          <div class="text-wrapper-11">Aufwand: ca. 3h</div>
+          <div class="text-wrapper-12">Förderband</div>
+          <button class="resetButton" v-if="isTask2Completed" @click="resetTask2Progress">Aufgabe erneut machen</button>
+          <img class="img" alt="Ed o neil" src="../assets/vetter_kleinförderband.jpg" />
+          <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('MY6m4tsFKn2twm8qKabW') }}% </div>
+        </div>
+      </router-link>
+      <router-link :to="getAufgabenRoute3()">
         <div class="aufgabe-2">
           <div class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...In dieser kurzen Aufgabe werden die Grundfunktionen...</div>
           <div class="text-wrapper-11">Aufwand: ca. 3h</div>
-          <div class="text-wrapper-12">Bohrstation</div>
+          <div class="text-wrapper-12">Förderband erweitert</div>
+          <button class="resetButton" v-if="isTask3Completed" @click="resetTask3Progress">Aufgabe erneut machen</button>
           <img class="img" alt="Fkphulv m" src="../assets/Bohrstation.png" />
-          <!-- Hier kannst du bei Bedarf auch den Aufgabenfortschritt für diese Aufgabe anzeigen -->
+          <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('Hx4m8tkFVn2wLb6sQaZ9') }}% </div>
         </div>
       </router-link>
-      <router-link to="/AzF">
-        <div class="aufgabe-3">
-          <p class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...</p>
+      <router-link :to="getAufgabenRoute4()">
+        <div class="aufgabe-4">
+          <div class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...In dieser kurzen Aufgabe werden die Grundfunktionen...</div>
           <div class="text-wrapper-11">Aufwand: ca. 3h</div>
-          <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('VVhTKyWdjb9XWouuKg9L') }}% </div>
-          <div class="text-wrapper-12">Förderband</div>
-          <img class="img" alt="Ed o neil" src="../assets/vetter_kleinförderband.jpg" />
+          <div class="text-wrapper-12">Bohrstation</div>
+          <button class="resetButton" v-if="isTask4Completed" @click="resetTask4Progress">Aufgabe erneut machen</button>
+          <img class="img" alt="Fkphulv m" src="../assets/Bohrstation.png" />
+          <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('P3n7qsRGyJt5wm2aKbW8') }}% </div>
         </div>
       </router-link>
+      <router-link :to="getAufgabenRoute5()">
+        <div class="aufgabe-5">
+          <div class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...In dieser kurzen Aufgabe werden die Grundfunktionen...</div>
+          <div class="text-wrapper-11">Aufwand: ca. 3h</div>
+          <div class="text-wrapper-12">Aufgabe Komplett</div>
+          <button class="resetButton" v-if="isTask5Completed" @click="resetTask5Progress">Aufgabe erneut machen</button>
+          <img class="img" alt="Fkphulv m" src="../assets/Bohrstation.png" />
+          <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('Tc2x5jpYgHw9Ln4qKsF6') }}% </div>
+        </div>
+      </router-link>
+      
       <div class="page-heading">
         <div class="frame-wrapper">
           <div class="div-wrapper">
@@ -57,32 +81,173 @@
 <script>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+//import { useRouter } from 'vue-router';
 
 export default {
   setup() {
     const store = useStore();
+    //const router = useRouter();
 
     const getTaskProgressById = computed(() => {
       return store.getters.getTaskProgressById;
     });
 
     const getAufgabenRoute = () => {
-      const progress = store.state.progress;
-      if (progress === 25) {
-        return "/AzF2";
-      } else if (progress === 50) {
-        return "/AzF3";
-      } else if (progress === 75) {
-        return "/AzF4";
-      } else {
-        return "/aufgaben";
-      }
+      const userProgress = store.getters.getTaskProgressById('E7jR9ufXzLp5ah2qKbW3'); // Progress der Aufgabe 1
+        if (userProgress === 0) {
+          return "/AzT";
+        } else if (userProgress === 25) {
+          return "/AzT2";
+        } else if (userProgress === 50) {
+          return "/AzT3";
+        } else if (userProgress === 75) {
+          return "/AzT4";
+        } else {
+          return "/Aufgaben";
+        }
+      };
+
+       // Überprüfen, ob die Aufgabe 1 zu 100% erledigt ist
+    const isTask1Completed = computed(() => {
+      const taskProgress = store.getters.getTaskProgressById('E7jR9ufXzLp5ah2qKbW3');
+      return taskProgress === 100;
+    });
+
+    // Funktion zum Zurücksetzen des Fortschritts der Aufgabe 1
+    const resetTask1Progress = () => {
+      store.dispatch('resetTask1Progress'); // Action im Store aufrufen
+    };
+
+
+    const getAufgabenRoute2 = () => {
+      const userProgress = store.getters.getTaskProgressById('MY6m4tsFKn2twm8qKabW'); // Progress der Aufgabe 1
+        if (userProgress === 0) {
+          return "/AzF";
+        } else if (userProgress === 25) {
+          return "/AzF2";
+        } else if (userProgress === 50) {
+          return "/AzF3";
+        } else if (userProgress === 75) {
+          return "/AzF4";
+        } else {
+          return "/Aufgaben";
+        }
+    };
+
+
+    const isTask2Completed = computed(() => {
+      const taskProgress = store.getters.getTaskProgressById('MY6m4tsFKn2twm8qKabW');
+      return taskProgress === 100;
+    });
+
+
+    const resetTask2Progress = () => {
+      store.dispatch('resetTask2Progress');
+      //router.push('AzF')
+    };
+
+
+    const getAufgabenRoute3 = () => {
+      const userProgress = store.getters.getTaskProgressById('Hx4m8tkFVn2wLb6sQaZ9'); // Progress der Aufgabe 1
+        if (userProgress === 0) {
+          return "/AzFe";
+        } else if (userProgress === 25) {
+          return "/AzFe2";
+        } else if (userProgress === 50) {
+          return "/AzFe3";
+        } else if (userProgress === 75) {
+          return "/AzFe4";
+        } else {
+          return "/Aufgaben";
+        }
+    };
+
+
+    const isTask3Completed = computed(() => {
+      const taskProgress = store.getters.getTaskProgressById('Hx4m8tkFVn2wLb6sQaZ9');
+      return taskProgress === 100;
+    });
+
+
+    const resetTask3Progress = () => {
+      store.dispatch('resetTask3Progress');
+    };
+
+
+    const getAufgabenRoute4 = () => {
+      const userProgress = store.getters.getTaskProgressById('P3n7qsRGyJt5wm2aKbW8'); // Progress der Aufgabe 1
+        if (userProgress === 0) {
+          return "/AzB";
+        } else if (userProgress === 25) {
+          return "/AzB2";
+        } else if (userProgress === 50) {
+          return "/AzB3";
+        } else if (userProgress === 75) {
+          return "/AzB4";
+        } else {
+          return "/Aufgaben";
+        }
+    };
+
+
+    const isTask4Completed = computed(() => {
+      const taskProgress = store.getters.getTaskProgressById('P3n7qsRGyJt5wm2aKbW8');
+      return taskProgress === 100;
+    });
+
+
+    const resetTask4Progress = () => {
+      store.dispatch('resetTask4Progress');
+    };
+
+
+    const getAufgabenRoute5 = () => {
+      const userProgress = store.getters.getTaskProgressById('Tc2x5jpYgHw9Ln4qKsF6'); // Progress der Aufgabe 1
+        if (userProgress === 0) {
+          return "/AK";
+        } else if (userProgress === 25) {
+          return "/AK2";
+        } else if (userProgress === 50) {
+          return "/AK3";
+        } else if (userProgress === 75) {
+          return "/AK4";
+        } else {
+          return "/Aufgaben";
+        }
+    };
+
+
+    const isTask5Completed = computed(() => {
+      const taskProgress = store.getters.getTaskProgressById('Tc2x5jpYgHw9Ln4qKsF6');
+      return taskProgress === 100;
+    });
+
+
+    const resetTask5Progress = () => {
+      store.dispatch('resetTask5Progress');
     };
 
     return {
       getTaskProgressById,
-      getAufgabenRoute
+      getAufgabenRoute,
+      isTask1Completed,
+      resetTask1Progress,
+      getAufgabenRoute2,
+      isTask2Completed,
+      resetTask2Progress,
+      getAufgabenRoute3,
+      isTask3Completed,
+      resetTask3Progress,
+      getAufgabenRoute4,
+      isTask4Completed,
+      resetTask4Progress,
+      getAufgabenRoute5,
+      isTask5Completed,
+      resetTask5Progress,
+      
     };
+
+    
   }
 };
 </script>
@@ -320,6 +485,10 @@ export default {
   white-space: nowrap;
 }
 
+.aufgaben-seite .resetButton{
+  margin: 110px 184px;
+}
+
 .aufgaben-seite .img {
   height: 159px;
   left: 0;
@@ -354,6 +523,74 @@ export default {
   top: 189px;
   width: 821px;
 }
+
+.aufgaben-seite .aufgabe-4 {
+  background-color: #fafaf5;
+  border: 2px solid;
+  border-color: #e6e6e6;
+  border-radius: 24px;
+  height: 159px;
+  left: 96px;
+  overflow: hidden;
+  position: absolute;
+  top: 759px; /* Hier habe ich die Position angepasst */
+  width: 821px;
+}
+
+.aufgaben-seite .aufgabe-5 {
+  background-color: #fafaf5;
+  border: 2px solid;
+  border-color: #e6e6e6;
+  border-radius: 24px;
+  height: 159px;
+  left: 96px;
+  overflow: hidden;
+  position: absolute;
+  top: 949px; /* Hier habe ich die Position angepasst */
+  width: 821px;
+}
+
+.aufgaben-seite .aufgabe-4 .text-wrapper-10,
+.aufgaben-seite .aufgabe-5 .text-wrapper-10,
+.aufgaben-seite .aufgabe-4 .text-wrapper-11,
+.aufgaben-seite .aufgabe-5 .text-wrapper-11,
+.aufgaben-seite .aufgabe-4 .text-wrapper-12,
+.aufgaben-seite .aufgabe-5 .text-wrapper-12,
+.aufgaben-seite .aufgabe-4 .img,
+.aufgaben-seite .aufgabe-5 .img,
+.aufgaben-seite .aufgabe-4 .aufgaben-state {
+  position: absolute;
+  left: 184px; /* Hier habe ich die Position angepasst */
+}
+
+.aufgaben-seite .aufgabe-4 .text-wrapper-10,
+.aufgaben-seite .aufgabe-5 .text-wrapper-10 {
+  top: 52px;
+  width: 613px;
+}
+
+.aufgaben-seite .aufgabe-4 .text-wrapper-11,
+.aufgaben-seite .aufgabe-5 .text-wrapper-11 {
+  top: 22px;
+  right: 184px; /* Hier habe ich die Position angepasst */
+}
+
+.aufgaben-seite .aufgabe-4 .text-wrapper-12,
+.aufgaben-seite .aufgabe-5 .text-wrapper-12 {
+  top: 22px;
+}
+
+.aufgaben-seite .aufgabe-4 .img,
+.aufgaben-seite .aufgabe-5 .img {
+  top: 0;
+  left: 0;
+}
+
+.aufgaben-seite .aufgabe-4 .aufgaben-state {
+  top: 0px;
+}
+
+
 
 .aufgaben-seite .page-heading {
   background-color: #ffffff;
@@ -401,5 +638,7 @@ export default {
   left: 0px;
   top: 00px;
 }
+
+
 
 </style>

@@ -2,7 +2,7 @@
   <div class="news">
     <div class="div">
       <div class="aufgabe">
-        <div> Aufgabenfortschritt des Benutzers: {{ userProgress }}%</div>
+        <div> Aufgabenfortschritt des Benutzers: {{ getTaskProgressById('MY6m4tsFKn2twm8qKabW') }}%</div>
         <div class="text-wrapper-2">Letzte Aktualisierung: 17.02.2024</div>
         <button class="button1" @click="handleClick"> Zurück </button>
         <button class="button2" @click="handleClick2"> Weiter </button>
@@ -31,25 +31,26 @@ export default {
     const router = useRouter()
     const store = useStore()
 
+    // Fortschritt des angemeldeten Benutzers aus dem Store abrufen
+    const getTaskProgressById = computed(() => {
+      return store.getters.getTaskProgressById;
+    });
+
     const handleClick = () => {
-      store.dispatch('decreaseTaskProgress');
+      store.dispatch('decreaseTask2Progress');
       router.push('/Aufgaben')
     }
 
     const handleClick2 = () => {
-      store.dispatch('increaseTaskProgress');      
+      store.dispatch('increaseTask2Progress');      
       router.push('/AzF2')
     }
 
-    // Fortschritt des angemeldeten Benutzers aus dem Store abrufen
-    const userProgress = computed(() => {
-      return store.state.progress
-    })
 
     return {
       handleClick,
       handleClick2,
-      userProgress
+      getTaskProgressById
     }
   }
 }
