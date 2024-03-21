@@ -14,14 +14,14 @@
           <div class="text-wrapper-9">Aufgaben</div>
         </div>
       </div>
-        <router-link :to="getAufgabenRoute()">
+      <router-link :to="getAufgabenRoute()">
         <div class="aufgabe-3">
           <div class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...</div>
           <div class="text-wrapper-11">Aufwand: ca. 3h</div>
           <div class="text-wrapper-12">Theorie der Komponenten</div>
           <button class="resetButton" v-if="isTask1Completed" @click="resetTask1Progress">Aufgabe erneut machen</button>
           <img class="img" alt="Noonbrew ekmak" src="../assets/Sensoren.png" />
-          <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('E7jR9ufXzLp5ah2qKbW3') }}% </div>
+          <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('E7jR9ufXzLp5ah2qKbW3') }}% </div> <!--'E7jR9ufXzLp5ah2qKbW3' ist die ID der ersten Aufgabe-->
         </div>
       </router-link>
       <router-link :to="getAufgabenRoute2()">
@@ -93,24 +93,32 @@ export default {
     });
 
     const getAufgabenRoute = () => {
+      // Fortschritt wird über den getter abgerufen 
       const userProgress = store.getters.getTaskProgressById('E7jR9ufXzLp5ah2qKbW3'); // Progress der Aufgabe 1
+        // Wenn zu 0% erledigt, weiterleiten zu Seite 1 der Aufgabe (hier AzT)
         if (userProgress === 0) {
           return "/AzT";
+          // Wenn zu 25% erledigt, weiterleiten zu Seite 2 der Aufgabe (hier AzT2)
         } else if (userProgress === 25) {
           return "/AzT2";
+          // Wenn zu 50% erledigt, weiterleiten zu Seite 3 der Aufgabe (hier AzT3)
         } else if (userProgress === 50) {
           return "/AzT3";
+          // Wenn zu 75% erledigt, weiterleiten zu Seite 4 der Aufgabe (hier AzT4)
         } else if (userProgress === 75) {
           return "/AzT4";
+          // Wenn etwas anderes wie oben dann zur Aufgaben Seite weiterleiten (z.B. Bei 100%)
         } else {
           return "/Aufgaben";
         }
       };
 
-       // Überprüfen, ob die Aufgabe 1 zu 100% erledigt ist
+    // Eigenschaft um den Abschlussstatus der Aufgabe 1 festzustellen
     const isTask1Completed = computed(() => {
+      // Die Fortschrittsdaten der Aufgabe 1 aus dem Store abrufen
       const taskProgress = store.getters.getTaskProgressById('E7jR9ufXzLp5ah2qKbW3');
-      return taskProgress === 100;
+      // Überprüfen, ob der Fortschritt der Aufgabe 1 100% erreicht hat
+      return taskProgress === 100;// Wenn ja, gibt `true` zurück, sonst `false`
     });
 
     // Funktion zum Zurücksetzen des Fortschritts der Aufgabe 1

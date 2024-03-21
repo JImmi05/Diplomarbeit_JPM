@@ -6,7 +6,6 @@
         <div class="text-wrapper-2">Letzte Aktualisierung: 17.02.2024</div>
         <button class="button1" @click="handleClick"> Zurück </button>
         <button class="button2" @click="handleClick2"> Weiter </button>
-        <!-- Weitere Inhalte hier -->
       </div>
       <div class="page-heading">
         <div class="frame">

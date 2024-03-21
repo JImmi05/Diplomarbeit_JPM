@@ -41,10 +41,12 @@ const store = createStore({
     }
   },
   actions: {
+    //Funktion zum Registrieren eines Benutzers
     async signup(context, { email, password }) {
       console.log('signup action');
     
       try {
+        //Benutzer mit E-Mail und Passwort erstellen
         const authRes = await createUserWithEmailAndPassword(auth, email, password);
         const user = authRes.user;
     
@@ -55,13 +57,12 @@ const store = createStore({
     
         // Beispiel: Erstellen von Aufgaben für den neuen Benutzer
         const tasksCollectionRef = collection(db, 'users', user.uid, 'tasks');
-        // Verwende eine feste Aufgaben-ID für die Aufgabe 1
+        // Feste Aufgaben-IDs für die Aufgaben und Fortschritt von "progress: 0"
         await setDoc(doc(tasksCollectionRef, 'E7jR9ufXzLp5ah2qKbW3'), { name: 'Task1', progress: 0 });
         await setDoc(doc(tasksCollectionRef, 'MY6m4tsFKn2twm8qKabW'), { name: 'Task2', progress: 0 });
         await setDoc(doc(tasksCollectionRef, 'Hx4m8tkFVn2wLb6sQaZ9'), { name: 'Task3', progress: 0 });
         await setDoc(doc(tasksCollectionRef, 'P3n7qsRGyJt5wm2aKbW8'), { name: 'Task4', progress: 0 });
         await setDoc(doc(tasksCollectionRef, 'Tc2x5jpYgHw9Ln4qKsF6'), { name: 'Task5', progress: 0 });
-        // Weitere Aufgaben hinzufügen, wenn nötig
     
         // Benutzerdaten im Store aktualisieren
         context.commit('setUser', user);
@@ -91,31 +92,53 @@ const store = createStore({
     },
     async fetchTasks({ state, commit }) {
       try {
+        // Firestore-Instanz abrufen
         const db = getFirestore();
+        // Referenz auf die Aufgabenkollektion des aktuellen Benutzers in Firestore erstellen
         const tasksCollectionRef = collection(db, 'users', state.userUID, 'tasks');
+        // Aufgaben aus der Datenbank abrufen
         const querySnapshot = await getDocs(tasksCollectionRef);
         const tasks = [];
+
+        // Durchlauft jedes Dokument im Abfrage-Snapshot und fügt es zur Aufgabenliste hinzu
         querySnapshot.forEach(doc => {
           tasks.push({ id: doc.id, ...doc.data() });
         });
+
+        // Aktualisiere den Vuex-Store mit den abgerufenen Aufgaben
         commit('setTasks', tasks);
       } catch (error) {
+
+        // Fehlerbehandlung im Falle eines Fehlers beim Abrufen der Aufgaben
         console.error('Error fetching tasks:', error);
       }
     },
+    // Diese Funktion erhöht den Fortschritt der ersten Aufgabe um 25 % im Store und in der Firestore-Datenbank.
+    // Sie wird verwendet, um den Fortschritt einer bestimmten Aufgabe zu aktualisieren.
     async increaseTask1Progress({ state, commit }) {
       try {
-        const taskId = 'E7jR9ufXzLp5ah2qKbW3'; // ID der Aufgabe 1
+        // Definiere die ID der Aufgabe, deren Fortschritt erhöht werden soll (Hier ID der Aufgabe 1)
+        const taskId = 'E7jR9ufXzLp5ah2qKbW3';
+        // Zugriff auf die Firestore-Datenbank
         const db = getFirestore();
+        // Referenz zum Dokument der Aufgabe in der Firestore-Datenbank
         const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        // Abrufen der Aufgabe aus der Firestore-Datenbank
         const taskDocSnap = await getDoc(taskDocRef);
+
+        // Überprüfen, ob das Dokument existiert
         if (taskDocSnap.exists()) {
+           // Aktuellen Fortschritt der Aufgabe aus dem Snapshot abrufen
           const currentProgress = taskDocSnap.data().progress || 0;
+          // Neuen Fortschritt berechnen, indem 25 % zum aktuellen Fortschritt hinzugefügt werden (max. 100%)
           const newProgress = Math.min(100, currentProgress + 25);
+          // Aktualisieren des Fortschritts in der Firestore-Datenbank
           await updateDoc(taskDocRef, { progress: newProgress });
+          // Aktualisieren des Fortschritts im Vuex Store
           commit('updateTaskProgress', { taskId, progress: newProgress });
         }
       } catch (error) {
+        // Fehlerbehandlung, falls ein Fehler auftritt
         console.error('Error increasing task 1 progress:', error);
       }
     },
@@ -137,11 +160,14 @@ const store = createStore({
     },
     async resetTask1Progress({ state, commit }) {
       try {
+
         const taskId = 'E7jR9ufXzLp5ah2qKbW3'; // ID der Aufgabe 1
         const db = getFirestore();
         const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
-        await updateDoc(taskDocRef, { progress: 0 }); // Fortschritt auf 0 setzen
-        commit('updateTaskProgress', { taskId, progress: 0 }); // Fortschritt im Store aktualisieren
+        // Fortschritt der Aufgabe 1 in der Firestore-Datenbank auf 0 setzen
+        await updateDoc(taskDocRef, { progress: 0 });
+         // Fortschritt im Vuex Store aktualisieren
+        commit('updateTaskProgress', { taskId, progress: 0 });
       } catch (error) {
         console.error('Error resetting task 1 progress:', error);
       }

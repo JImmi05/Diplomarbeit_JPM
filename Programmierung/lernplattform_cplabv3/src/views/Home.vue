@@ -41,11 +41,17 @@ import { useStore } from 'vuex';
 
 export default {
   setup() {
+
+    // Verwendung des Vuex-Stores im Setup
     const store = useStore();
+
+    //Eigenschaft, um den Benutzerzustand aus dem Store zu erhalten
     const user = computed(() => store.state.user)
 
     onMounted(async () => {
+      // Überprüfen, ob ein Benutzer im Store vorhanden ist (Wenn ja, ausführen)
       if (user.value) {
+        //Hier wird die Aktion "fetchTasks aufgerufen"
         await store.dispatch('fetchTasks');
       }
     });
