@@ -2,16 +2,20 @@
   <div class="aufgaben-seite">
     <div class="div">
       <div class="summary">
-        <div class="text-wrapper">5.5h</div>
-        <div class="text-wrapper-2">Gesamt</div>
-        <div class="text-wrapper-3">3h</div>
-        <div class="text-wrapper-4">Bohrstation</div>
-        <div class="text-wrapper-5">1h</div>
-        <div class="text-wrapper-6">Sensoren des Förderbands</div>
-        <div class="text-wrapper-7">1.5h</div>
-        <div class="text-wrapper-8">Förderband</div>
+        <div class="text-wrapper-18">Gesamt</div>
+        <div class="text-wrapper-19">{{ averageTaskProgress }}%</div>
+        <div class="text-wrapper-16">{{ getTaskProgressById('Tc2x5jpYgHw9Ln4qKsF6') }}%</div>
+        <div class="text-wrapper-17">Aufgabe Komplett</div>
+        <div class="text-wrapper-14">{{ getTaskProgressById('P3n7qsRGyJt5wm2aKbW8') }}%</div>
+        <div class="text-wrapper-15">Bohrstation</div>
+        <div class="text-wrapper-3">{{ getTaskProgressById('Hx4m8tkFVn2wLb6sQaZ9') }}%</div>
+        <div class="text-wrapper-4">Förderband erweitert</div>
+        <div class="text-wrapper-5">{{ getTaskProgressById('MY6m4tsFKn2twm8qKabW') }}%</div>
+        <div class="text-wrapper-6">Förderband</div>
+        <div class="text-wrapper-7">{{ getTaskProgressById('E7jR9ufXzLp5ah2qKbW3') }}%</div>
+        <div class="text-wrapper-8">Theorie der Komponenten</div>
         <div class="frame">
-          <div class="text-wrapper-9">Aufgaben</div>
+          <div class="text-wrapper-9">Zusammenfassung</div>
         </div>
       </div>
       <router-link :to="getAufgabenRoute()">
@@ -26,7 +30,7 @@
       </router-link>
       <router-link :to="getAufgabenRoute2()">
         <div class="aufgabe">
-          <p class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...</p>
+          <div class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...</div>
           <div class="text-wrapper-11">Aufwand: ca. 3h</div>
           <div class="text-wrapper-12">Förderband</div>
           <button class="resetButton" v-if="isTask2Completed" @click="resetTask2Progress">Aufgabe erneut machen</button>
@@ -90,6 +94,18 @@ export default {
 
     const getTaskProgressById = computed(() => {
       return store.getters.getTaskProgressById;
+    });
+
+    const averageTaskProgress = computed(() => {
+      const totalProgress = (
+        store.getters.getTaskProgressById('E7jR9ufXzLp5ah2qKbW3') +
+        store.getters.getTaskProgressById('MY6m4tsFKn2twm8qKabW') +
+        store.getters.getTaskProgressById('Hx4m8tkFVn2wLb6sQaZ9') +
+        store.getters.getTaskProgressById('P3n7qsRGyJt5wm2aKbW8') +
+        store.getters.getTaskProgressById('Tc2x5jpYgHw9Ln4qKsF6')
+      );
+
+      return totalProgress / 5;
     });
 
     const getAufgabenRoute = () => {
@@ -237,6 +253,7 @@ export default {
 
     return {
       getTaskProgressById,
+      averageTaskProgress,
       getAufgabenRoute,
       isTask1Completed,
       resetTask1Progress,
@@ -295,39 +312,12 @@ export default {
   width: 395px;
 }
 
-.aufgaben-seite .text-wrapper {
-  color: #000000;
-  font-family: "Inter-SemiBold", Helvetica;
-  font-size: 16px;
-  font-weight: 600;
-  left: 336px;
-  letter-spacing: 0;
-  line-height: 20.8px;
-  position: absolute;
-  text-align: right;
-  top: 271px;
-  white-space: nowrap;
-}
-
-.aufgaben-seite .text-wrapper-2 {
-  color: #000000;
-  font-family: "Inter-SemiBold", Helvetica;
-  font-size: 16px;
-  font-weight: 600;
-  left: 24px;
-  letter-spacing: 0;
-  line-height: 20.8px;
-  position: absolute;
-  top: 274px;
-  white-space: nowrap;
-}
-
 .aufgaben-seite .text-wrapper-3 {
   color: #000000;
   font-family: "Inter-Regular", Helvetica;
   font-size: 16px;
   font-weight: 400;
-  left: 351px;
+  right: 25px;
   letter-spacing: 0;
   line-height: 20.8px;
   position: absolute;
@@ -354,7 +344,7 @@ export default {
   font-family: "Inter-Regular", Helvetica;
   font-size: 16px;
   font-weight: 400;
-  left: 354px;
+  right: 25px;
   letter-spacing: 0;
   line-height: 20.8px;
   position: absolute;
@@ -381,7 +371,7 @@ export default {
   font-family: "Inter-Regular", Helvetica;
   font-size: 16px;
   font-weight: 400;
-  left: 340px;
+  right: 25px;
   letter-spacing: 0;
   line-height: 20.8px;
   position: absolute;
@@ -441,10 +431,10 @@ export default {
 }
 
 .aufgaben-seite .text-wrapper-10 {
-  color: #426b1f;
+  color: #000000;
   font-family: "Inter-SemiBold", Helvetica;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 400;
   left: 184px;
   letter-spacing: 0;
   line-height: 26px;
@@ -458,12 +448,12 @@ export default {
   font-family: "Inter-SemiBold", Helvetica;
   font-size: 20px;
   font-weight: 600;
-  left: 640px;
+  right: 3%;
   letter-spacing: 0;
   line-height: 26px;
   position: absolute;
   text-align: right;
-  top: 22px;
+  top: 10%;
   white-space: nowrap;
 }
 
@@ -476,25 +466,26 @@ export default {
   letter-spacing: 0;
   line-height: 26px;
   position: absolute;
-  top: 22px;
+  top: 10%;
   white-space: nowrap;
 }
 
 .aufgaben-seite .aufgaben-state {
-  color: #1fff01;
+  color: #339901;
   font-family: "Inter-SemiBold", Helvetica;
   font-size: 20px;
   font-weight: 800;
-  left: 184px;
+  right: 3%;
   letter-spacing: 0;
   line-height: 26px;
   position: absolute;
-  top: 0px;
+  top: 75%;
   white-space: nowrap;
 }
 
 .aufgaben-seite .resetButton{
-  margin: 110px 184px;
+  margin-top: 122.25px;
+  margin-left: 184px;
 }
 
 .aufgaben-seite .img {
@@ -558,30 +549,6 @@ export default {
   width: 821px;
 }
 
-.aufgaben-seite .aufgabe-4 .text-wrapper-10,
-.aufgaben-seite .aufgabe-5 .text-wrapper-10,
-.aufgaben-seite .aufgabe-4 .text-wrapper-11,
-.aufgaben-seite .aufgabe-5 .text-wrapper-11,
-.aufgaben-seite .aufgabe-4 .text-wrapper-12,
-.aufgaben-seite .aufgabe-5 .text-wrapper-12,
-.aufgaben-seite .aufgabe-4 .img,
-.aufgaben-seite .aufgabe-5 .img,
-.aufgaben-seite .aufgabe-4 .aufgaben-state {
-  position: absolute;
-  left: 184px; /* Hier habe ich die Position angepasst */
-}
-
-.aufgaben-seite .aufgabe-4 .text-wrapper-10,
-.aufgaben-seite .aufgabe-5 .text-wrapper-10 {
-  top: 52px;
-  width: 613px;
-}
-
-.aufgaben-seite .aufgabe-4 .text-wrapper-11,
-.aufgaben-seite .aufgabe-5 .text-wrapper-11 {
-  top: 22px;
-  right: 184px; /* Hier habe ich die Position angepasst */
-}
 
 .aufgaben-seite .aufgabe-4 .text-wrapper-12,
 .aufgaben-seite .aufgabe-5 .text-wrapper-12 {
@@ -592,10 +559,6 @@ export default {
 .aufgaben-seite .aufgabe-5 .img {
   top: 0;
   left: 0;
-}
-
-.aufgaben-seite .aufgabe-4 .aufgaben-state {
-  top: 0px;
 }
 
 
@@ -642,10 +605,87 @@ export default {
   width: fit-content;
 }
 
-.aufgaben-seite .aufgabe-3 .Aufgaben-state{
-  left: 0px;
-  top: 00px;
+.aufgaben-seite .text-wrapper-15 {
+  color: #000000;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 24px;
+  letter-spacing: 0;
+  line-height: 20.8px;
+  position: absolute;
+  top: 191px;
+  white-space: nowrap;
 }
+
+.aufgaben-seite .text-wrapper-14 {
+  color: #000000;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  right: 25px;
+  letter-spacing: 0;
+  line-height: 20.8px;
+  position: absolute;
+  text-align: right;
+  top: 191px;
+  white-space: nowrap;
+}
+
+.aufgaben-seite .text-wrapper-17 {
+  color: #000000;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 24px;
+  letter-spacing: 0;
+  line-height: 20.8px;
+  position: absolute;
+  top: 228px;
+  white-space: nowrap;
+}
+
+.aufgaben-seite .text-wrapper-16 {
+  color: #000000;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  right: 25px;
+  letter-spacing: 0;
+  line-height: 20.8px;
+  position: absolute;
+  text-align: right;
+  top: 228px;
+  white-space: nowrap;
+}
+
+.aufgaben-seite .text-wrapper-18 {
+  color: #000000;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  left: 24px;
+  letter-spacing: 0;
+  line-height: 20.8px;
+  position: absolute;
+  top: 265px;
+  white-space: nowrap;
+}
+
+.aufgaben-seite .text-wrapper-19 {
+  color: #000000;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  right: 25px;
+  letter-spacing: 0;
+  line-height: 20.8px;
+  position: absolute;
+  text-align: right;
+  top: 265px;
+  white-space: nowrap;
+}
+
 
 
 

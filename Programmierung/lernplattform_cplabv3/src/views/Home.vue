@@ -27,9 +27,16 @@
       </p>
       <img class="img" alt="Image" src="../assets/Bohrstation.png" />
       
-      <p class="text-wrapper-3">Lernsystem der digitalen Lernfabrik im WIFI Dornbirn</p>
-      <header class="header">
-      </header>
+      <p class="text-wrapper-3">Lernplattform der digitalen Lernfabrik im WIFI Dornbirn</p>
+      <div class="footer">
+        <footer>
+          <h2>Impressum & Kontakt</h2>
+          <p>WIFI Dornbirn</p>
+          <p>Bahnhofstraße 24, 6850 Dornbirn</p>
+          <p>info(at)vlbg.wifi.at</p>
+          <p>Telefon: +43 5572 3894-425</p>
+        </footer>
+      </div>
     </div>
   </div>
 </template>
@@ -295,4 +302,12 @@ export default {
   white-space: nowrap;
 }
 
+.footer {
+  color: #000000;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 20px;
+  font-weight: 400;
+  position: absolute;
+  top: 1950px;
+}
 </style>
