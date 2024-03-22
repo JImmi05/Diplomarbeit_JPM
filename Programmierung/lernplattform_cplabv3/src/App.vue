@@ -12,12 +12,3 @@ export default {
   components: {Navbar}
 }
 </script>
-
-<style>
-.container {
-  max-width: fit-content;
-}
-</style>
-
-
-

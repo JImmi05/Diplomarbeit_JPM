@@ -27,7 +27,6 @@ import Aufgabe_Komplett from '../views/AK.vue'
 import Aufgabe_Komplett2 from '../views/AK2.vue'
 import Aufgabe_Komplett3 from '../views/AK3.vue'
 import Aufgabe_Komplett4 from '../views/AK4.vue'
-import Home2 from '../views/Home2.vue'
 
 
 const routes = [
@@ -170,11 +169,6 @@ const routes = [
     path: '/AK4',
     name: '/AK4',
     component: Aufgabe_Komplett4
-  },
-  {
-  path: '/Home2',
-    name: '/Home2',
-    component: Home2
   },
   
 ]
