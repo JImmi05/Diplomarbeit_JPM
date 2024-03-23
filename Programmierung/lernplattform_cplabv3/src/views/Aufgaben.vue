@@ -4,28 +4,28 @@
       <div class="summary">
         <div class="text-wrapper-18">Gesamt</div>
         <div class="text-wrapper-19">{{ averageTaskProgress }}%</div>
-        <div class="text-wrapper-16">{{ getTaskProgressById('Tc2x5jpYgHw9Ln4qKsF6') }}%</div>
-        <div class="text-wrapper-17">Aufgabe Komplett</div>
-        <div class="text-wrapper-14">{{ getTaskProgressById('P3n7qsRGyJt5wm2aKbW8') }}%</div>
-        <div class="text-wrapper-15">Bohrstation</div>
-        <div class="text-wrapper-3">{{ getTaskProgressById('Hx4m8tkFVn2wLb6sQaZ9') }}%</div>
-        <div class="text-wrapper-4">Förderband erweitert</div>
-        <div class="text-wrapper-5">{{ getTaskProgressById('MY6m4tsFKn2twm8qKabW') }}%</div>
+        <div class="text-wrapper-3">{{ getTaskProgressById('Tc2x5jpYgHw9Ln4qKsF6') }}%</div>
+        <div class="text-wrapper-4">Aufgabe Komplett</div>
+        <div class="text-wrapper-5">{{ getTaskProgressById('P3n7qsRGyJt5wm2aKbW8') }}%</div>
+        <div class="text-wrapper-6 ">Bohrstation</div>
+        <div class="text-wrapper-7">{{ getTaskProgressById('Hx4m8tkFVn2wLb6sQaZ9') }}%</div>
+        <div class="text-wrapper-8">Förderband</div>
+        <!-- <div class="text-wrapper-5">{{ getTaskProgressById('MY6m4tsFKn2twm8qKabW') }}%</div>
         <div class="text-wrapper-6">Förderband</div>
         <div class="text-wrapper-7">{{ getTaskProgressById('E7jR9ufXzLp5ah2qKbW3') }}%</div>
-        <div class="text-wrapper-8">Theorie der Komponenten</div>
+        <div class="text-wrapper-8">Theorie der Komponenten</div> -->
         <div class="frame">
           <div class="text-wrapper-9">Zusammenfassung</div>
         </div>
       </div>
-      <router-link :to="getAufgabenRoute()">
+      <!-- <router-link :to="getAufgabenRoute()">
         <div class="aufgabe-3">
           <div class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...</div>
           <div class="text-wrapper-11">Aufwand: ca. 3h</div>
           <div class="text-wrapper-12">Theorie der Komponenten</div>
           <button class="resetButton" v-if="isTask1Completed" @click="resetTask1Progress">Aufgabe erneut machen</button>
           <img class="img" alt="Noonbrew ekmak" src="../assets/Sensoren.png" />
-          <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('E7jR9ufXzLp5ah2qKbW3') }}% </div> <!--'E7jR9ufXzLp5ah2qKbW3' ist die ID der ersten Aufgabe-->
+          <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('E7jR9ufXzLp5ah2qKbW3') }}% </div> 
         </div>
       </router-link>
       <router-link :to="getAufgabenRoute2()">
@@ -34,22 +34,22 @@
           <div class="text-wrapper-11">Aufwand: ca. 3h</div>
           <div class="text-wrapper-12">Förderband</div>
           <button class="resetButton" v-if="isTask2Completed" @click="resetTask2Progress">Aufgabe erneut machen</button>
-          <img class="img" alt="Ed o neil" src="../assets/vetter_kleinförderband.jpg" />
+          <img class="img" alt="Ed o neil" src="../assets/Förderband.png" />
           <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('MY6m4tsFKn2twm8qKabW') }}% </div>
         </div>
-      </router-link>
+      </router-link> -->
       <router-link :to="getAufgabenRoute3()">
-        <div class="aufgabe-2">
+        <div class="aufgabe-3">
           <div class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...In dieser kurzen Aufgabe werden die Grundfunktionen...</div>
           <div class="text-wrapper-11">Aufwand: ca. 3h</div>
           <div class="text-wrapper-12">Förderband erweitert</div>
           <button class="resetButton" v-if="isTask3Completed" @click="resetTask3Progress">Aufgabe erneut machen</button>
-          <img class="img" alt="Fkphulv m" src="../assets/Bohrstation.png" />
+          <img class="img" alt="Fkphulv m" src="../assets/Förderband.png" />
           <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('Hx4m8tkFVn2wLb6sQaZ9') }}% </div>
         </div>
       </router-link>
       <router-link :to="getAufgabenRoute4()">
-        <div class="aufgabe-4">
+        <div class="aufgabe">
           <div class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...In dieser kurzen Aufgabe werden die Grundfunktionen...</div>
           <div class="text-wrapper-11">Aufwand: ca. 3h</div>
           <div class="text-wrapper-12">Bohrstation</div>
@@ -59,12 +59,12 @@
         </div>
       </router-link>
       <router-link :to="getAufgabenRoute5()">
-        <div class="aufgabe-5">
+        <div class="aufgabe-2">
           <div class="text-wrapper-10">In dieser kurzen Aufgabe werden die Grundfunktionen...In dieser kurzen Aufgabe werden die Grundfunktionen...</div>
           <div class="text-wrapper-11">Aufwand: ca. 3h</div>
           <div class="text-wrapper-12">Aufgabe Komplett</div>
           <button class="resetButton" v-if="isTask5Completed" @click="resetTask5Progress">Aufgabe erneut machen</button>
-          <img class="img" alt="Fkphulv m" src="../assets/Bohrstation.png" />
+          <img class="img" alt="Fkphulv m" src="../assets/Lernstation.png" />
           <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('Tc2x5jpYgHw9Ln4qKsF6') }}% </div>
         </div>
       </router-link>
@@ -98,14 +98,14 @@ export default {
 
     const averageTaskProgress = computed(() => {
       const totalProgress = (
-        store.getters.getTaskProgressById('E7jR9ufXzLp5ah2qKbW3') +
-        store.getters.getTaskProgressById('MY6m4tsFKn2twm8qKabW') +
+        // store.getters.getTaskProgressById('E7jR9ufXzLp5ah2qKbW3') +
+        // store.getters.getTaskProgressById('MY6m4tsFKn2twm8qKabW') +
         store.getters.getTaskProgressById('Hx4m8tkFVn2wLb6sQaZ9') +
         store.getters.getTaskProgressById('P3n7qsRGyJt5wm2aKbW8') +
         store.getters.getTaskProgressById('Tc2x5jpYgHw9Ln4qKsF6')
       );
 
-      return totalProgress / 5;
+      return totalProgress / 3;
     });
 
     const getAufgabenRoute = () => {

@@ -19,7 +19,7 @@
         Kleinförderbänder von Vetter vereinen Individualität mit maximaler Qualität. Sie sind kompakt, ohne
         Störkonturen und überzeugen mit geschickt integrierten, leistungsstarken Motoren.
       </p>
-      <img class="image" alt="Image" src="../assets/image-9.png" />
+      <img class="image" alt="Image" src="../assets/Förderband.png" />
       <p class="p">
         Die einzelnen Funktionsmodule werden einfach auf die Bänder aufgesetzt und über Ein- und Ausgänge oder Profi
         net/Profi - bus mit der integrierten Steuerung am Bandsystem verbunden. Damit sind sie innerhalb kürzester

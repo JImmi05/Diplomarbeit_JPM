@@ -14,7 +14,7 @@
         <router-link to="/IdF"><div class="anleitung-3">
           <p class="text-wrapper-3">Anleitung zur Installation des Förderbandes auf unsere Lenrplattform</p>
           <div class="text-wrapper-2">Installation des Förderbandes</div>
-          <img class="image-2" alt="Image" src="../assets/vetter_kleinförderband.jpg" />
+          <img class="image-2" alt="Image" src="../assets/Förderband.png" />
         </div></router-link>
         <router-link to="/IdBu"><div class="anleitung-4">
           <p class="text-wrapper">Anleitung zur den verschiedenen Buchsen der Sensoren</p>
