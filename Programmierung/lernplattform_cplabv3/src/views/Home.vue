@@ -4,12 +4,7 @@
       <div class="overlap-group">
         <div class="aufgabe"></div>
         <p class="hands-on-ist-die">
-          Hands on“ ist die Divise bei den Lernund Übungsstationen. So lassen sich zum Beispiel mit dem neuen
-          „CyberPhysical Laboratory“ im Wifi Dornbirn unterschiedlichste industrielle Aufgabenstellungen und Szenarien
-          live erleben – vom einzelnen Transferband bis hin zur kompletten Produktionsanlage mit verschiedenen Modulen
-          und Arbeitsplätzen. Alles ist dabei hochgradig vernetzt, um digitale Skills, wie Programmierung und
-          Kommunikation quer durch alle Unternehmensbereiche zu erlernen, denn diese sind für die Fertigung der
-          Zukunft unumgänglich. Unsere Arbeit soll das Erlernen von zukunftsweisenden Automatisier
+          Die Lernplattform soll eine Hilfe für die Lernenden darstellen, damit diese mit der Lernstation so einfach und effektiv wie möglich die Grundlagen der Elektrotechnik, Steuerungstechnik, Mechatronik und Automatisierungstechnik lernen können.
           <br />
           <br />
           Modulares Lernsystem für praxisnahe Aus – und Weiterbildung, welche aufbauend auf klassischen Inhalten der
@@ -17,16 +12,8 @@
           Lernanleitung (Webseite, Videos, AR, …) in Form von Infos, aufbauenden Aufgaben und Anleitungen.
         </p>
         <div class="unser-ziel">UNSER ZIEL:</div>
-        <p class="text-wrapper">
-          Kleinförderbänder von Vetter vereinen Individualität mit maximaler Qualität. Sie sind kompakt, ohne
-          Störkonturen und überzeugen mit geschickt integrierten, leistungsstarken Motoren.
-        </p>
-        <p class="p">
-          Kleinförderbänder von Vetter vereinen Individualität mit maximaler Qualität. Sie sind kompakt, ohne
-          Störkonturen und überzeugen mit geschickt integrierten, leistungsstarken Motoren.
-        </p>
-        <img class="image" alt="Image" src="../assets/Förderband.png" />
-        <img class="img" alt="Image" src="../assets/Bohrstation.png" />
+        <img class="image" alt="Image" src="../assets/Bohrstation_k.png" />
+        <img class="img" alt="Image" src="../assets/Förderband.png" />
       </div>
       <p class="text-wrapper-3">Lernsystem der digitalen Lernfabrik im WIFI Dornbirn</p>
       <div class="overlap">
@@ -116,7 +103,7 @@ export default {
   letter-spacing: 0;
   line-height: 32px;
   position: absolute;
-  top: 678px;
+  top: 770px;
   width: 998px;
 }
 
@@ -129,7 +116,7 @@ export default {
   letter-spacing: 0.96px;
   line-height: 38.4px;
   position: absolute;
-  top: 674px;
+  top: 790px;
   width: 181px;
 }
 
@@ -142,7 +129,7 @@ export default {
   letter-spacing: -0.14px;
   line-height: 22.4px;
   position: absolute;
-  top: 569px;
+  top: 625px;
   width: 1210px;
 }
 
@@ -160,20 +147,20 @@ export default {
 }
 
 .startseite .image {
-  height: 500px;
+  height: 730px;
   left: 59px;
-  object-fit: cover;
+  object-fit:fill;
   position: absolute;
-  top: 55px;
+  top: 20px;
   width: 1210px;
 }
 
 .startseite .img {
-  height: 500px;
+  height: 600px;
   left: 59px;
   object-fit: cover;
   position: absolute;
-  top: 1112px;
+  top: 1040px;
   width: 1210px;
 }
 

@@ -1,14 +1,14 @@
 <template>
   <form @submit.prevent="handleSubmit" class="login-form">
-    <h3>Login</h3>
+    <h3>Anmelden</h3>
 
-    <label for="email">Email:</label>
+    <label for="email">E-Mail:</label>
     <input type="email" name="email" v-model="email" required>
 
-    <label for="password">Password:</label>
+    <label for="password">Passwort:</label>
     <input type="password" name="password" v-model="password" required>
 
-    <button>Login</button>
+    <button>Anmelden</button>
     <div v-if="error" class="error-message">{{ error }}</div>
   </form>
 </template>

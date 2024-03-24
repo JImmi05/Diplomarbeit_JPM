@@ -17,8 +17,8 @@
       </div>
       <!-- für ausgeloggte User -->
       <div v-if="!user">    <!-- Ist der User eingeloggt? Erst wenn "nein" (! steht für nicht) wird Inhalt angezeigt-->
-        <router-link to="/login">Login</router-link>
-        <router-link to="/signup">Signup</router-link>
+        <router-link to="/login">Anmelden</router-link>
+        <router-link to="/signup">Registrieren</router-link>
       </div>
     </template>
   </nav>
