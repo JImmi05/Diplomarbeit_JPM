@@ -42,7 +42,7 @@
         <div class="aufgabe-3">
           <div class="text-wrapper-10">In dieser Aufgabe werden die Grundfunktionen des Förderbandes bearbeitet</div>
           <div class="text-wrapper-11">Aufwand: ca. 0.5h</div>
-          <div class="text-wrapper-12">Förderband erweitert</div>
+          <div class="text-wrapper-12">Förderband</div>
           <button class="resetButton" v-if="isTask3Completed" @click="resetTask3Progress">Aufgabe erneut machen</button>
           <img class="img" alt="Fkphulv m" src="../assets/Förderband.png" />
           <div class="aufgaben-state">Aufgabenfortschritt: {{ getTaskProgressById('Hx4m8tkFVn2wLb6sQaZ9') }}% </div>
