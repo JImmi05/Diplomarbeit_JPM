@@ -105,7 +105,8 @@ export default {
         store.getters.getTaskProgressById('Tc2x5jpYgHw9Ln4qKsF6')
       );
 
-      return totalProgress / 3;
+      const totalProgressRounded = parseFloat((totalProgress /3).toFixed(2));
+      return totalProgressRounded;
     });
 
     const getAufgabenRoute = () => {
