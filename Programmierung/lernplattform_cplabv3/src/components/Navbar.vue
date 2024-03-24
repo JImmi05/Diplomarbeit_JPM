@@ -4,7 +4,7 @@
     <template v-if="authIsReady">
       <!-- für alle User -->
       <div>
-        <router-link to="/">Home</router-link>
+        <router-link to="/">Startseite</router-link>
       </div>
       <div>
         <router-link to="/anleitungen">Anleitung</router-link>
