@@ -1,46 +1,61 @@
 <template>
   <div class="startseite">
     <div class="div">
-      <p class="hands-on-ist-die">
-        Hands on“ ist die Divise bei den Lern und Übungsstationen. So lassen sich zum Beispiel mit dem neuen
-        „Cyber Physical Laboratory“ im Wifi Dornbirn unterschiedlichste industrielle Aufgabenstellungen und Szenarien
-        live erleben – vom einzelnen Transferband bis hin zur kompletten Produktionsanlage mit verschiedenen Modulen
-        und Arbeitsplätzen. Alles ist dabei hochgradig vernetzt, um digitale Skills, wie Programmierung und
-        Kommunikation quer durch alle Unternehmensbereiche zu erlernen, denn diese sind für die Fertigung der Zukunft
-        unumgänglich. Unsere Arbeit soll das Erlernen von zukunftsweisenden Automatisier
-        <br />
-        <br />
-        Modulares Lernsystem für praxisnahe Aus – und Weiterbildung, welche aufbauend auf klassischen Inhalten der
-        Elektrotechnik Kompetenzen neuer Technologien und Systeme in Kontext von Industrie 4.0 vermittelt.
-        Lernanleitung (Webseite, Videos, AR, …) in Form von Infos, aufbauenden Aufgaben und Anleitungen.
-      </p>
-      <div class="unser-ziel">UNSER ZIEL:</div>
-      <p class="text-wrapper">
-        Kleinförderbänder von Vetter vereinen Individualität mit maximaler Qualität. Sie sind kompakt, ohne
-        Störkonturen und überzeugen mit geschickt integrierten, leistungsstarken Motoren.
-      </p>
-      <img class="image" alt="Image" src="../assets/image-9.png" />
-      <p class="p">
-        Die einzelnen Funktionsmodule werden einfach auf die Bänder aufgesetzt und über Ein- und Ausgänge oder Profi
-        net/Profi - bus mit der integrierten Steuerung am Bandsystem verbunden. Damit sind sie innerhalb kürzester
-        Zeit einsatzbereit.
-      </p>
-      <img class="img" alt="Image" src="../assets/Bohrstation.png" />
-      
+      <div class="overlap-group">
+        <div class="aufgabe"></div>
+        <p class="hands-on-ist-die">
+          Die Lernplattform soll eine Hilfe für die Lernenden darstellen, damit diese mit der Lernstation so einfach und effektiv wie möglich die Grundlagen der Elektrotechnik, Steuerungstechnik, Mechatronik und Automatisierungstechnik lernen können.
+          <br />
+          <br />
+          Modulares Lernsystem für praxisnahe Aus – und Weiterbildung, welche aufbauend auf klassischen Inhalten der
+          Elektrotechnik Kompetenzen neuer Technologien und Systeme in Kontext von Industrie 4.0 vermittelt.
+          Lernanleitung (Webseite, Videos, AR, …) in Form von Infos, aufbauenden Aufgaben und Anleitungen.
+        </p>
+        <div class="unser-ziel">UNSER ZIEL:</div>
+        <img class="image" alt="Image" src="../assets/Bohrstation_k.png" />
+        <img class="img" alt="Image" src="../assets/Förderband.png" />
+      </div>
       <p class="text-wrapper-3">Lernsystem der digitalen Lernfabrik im WIFI Dornbirn</p>
-      <header class="header">
-      </header>
+      <div class="overlap">
+        <div class="rectangle"></div>
+        <p class="WIFI-dornbirn">
+          WIFI Dornbirn
+          <br />
+          Bahnhofstraße 2 4, 6850 Dornbirn
+          <br />
+          info(at)vlbg.wifi.at
+          <br />
+          Telefon: +43 5572 3894-425
+        </p>
+        <div class="impressum-kontakte">IMPRESSUM &amp; KONTAKTE</div>
+      </div>
     </div>
   </div>
 </template>
 
 
 <script>
-  export default {
-    name: 'StartseiteView'
+import { computed, onMounted } from 'vue';
+import { useStore } from 'vuex';
+
+export default {
+  setup() {
+
+    // Verwendung des Vuex-Stores im Setup
+    const store = useStore();
+
+    //Eigenschaft, um den Benutzerzustand aus dem Store zu erhalten
+    const user = computed(() => store.state.user)
+
+    onMounted(async () => {
+      // Überprüfen, ob ein Benutzer im Store vorhanden ist (Wenn ja, ausführen)
+      if (user.value) {
+        //Hier wird die Aktion "fetchTasks aufgerufen"
+        await store.dispatch('fetchTasks');
+      }
+    });
   }
-
-
+}
 </script>
 
 <style>
@@ -55,8 +70,28 @@
 .startseite .div {
   background-color: #ffffff;
   height: 2092px;
-  position: absolute;
+  position: relative;
   width: 1440px;
+}
+
+.startseite .overlap-group {
+  height: 1675px;
+  left: 56px;
+  position: absolute;
+  top: 276px;
+  width: 1327px;
+}
+
+.startseite .aufgabe {
+  background-color: #fafaf5;
+  border: 2px solid;
+  border-color: #e6e6e6;
+  border-radius: 24px;
+  height: 1660px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1327px;
 }
 
 .startseite .hands-on-ist-die {
@@ -64,12 +99,12 @@
   font-family: "Inter-Regular", Helvetica;
   font-size: 20px;
   font-weight: 400;
-  left: 309px;
+  left: 271px;
   letter-spacing: 0;
   line-height: 32px;
   position: absolute;
-  top: 1400px;
-  width: 822px;
+  top: 770px;
+  width: 998px;
 }
 
 .startseite .unser-ziel {
@@ -77,11 +112,11 @@
   font-family: "Inter-SemiBold", Helvetica;
   font-size: 24px;
   font-weight: 600;
-  left: 96px;
+  left: 59px;
   letter-spacing: 0.96px;
   line-height: 38.4px;
   position: absolute;
-  top: 1350px;
+  top: 790px;
   width: 181px;
 }
 
@@ -90,21 +125,12 @@
   font-family: "Inter-Medium", Helvetica;
   font-size: 14px;
   font-weight: 500;
-  left: 629px;
+  left: 59px;
   letter-spacing: -0.14px;
   line-height: 22.4px;
   position: absolute;
-  top: 900px;
-  width: 786px;
-}
-
-.startseite .image {
-  height: 512px;
-  left: 695px;
-  object-fit: cover;
-  position: absolute;
-  top: 400px;
-  width: 666px;
+  top: 625px;
+  width: 1210px;
 }
 
 .startseite .p {
@@ -112,34 +138,30 @@
   font-family: "Inter-Medium", Helvetica;
   font-size: 14px;
   font-weight: 500;
-  left: 144px;
+  left: 59px;
   letter-spacing: -0.14px;
   line-height: 22.4px;
   position: absolute;
-  top: 1200px;
-  width: 1029px;
+  top: 1619px;
+  width: 1210px;
+}
+
+.startseite .image {
+  height: 730px;
+  left: 59px;
+  object-fit:fill;
+  position: absolute;
+  top: 20px;
+  width: 1210px;
 }
 
 .startseite .img {
-  height: 708px;
-  left: 144px;
+  height: 600px;
+  left: 59px;
   object-fit: cover;
   position: absolute;
-  top: 500px;
-  width: 453px;
-}
-
-.startseite .button {
-  all: unset;
-  background-color: #426b1f;
-  border-radius: 8px;
-  box-sizing: border-box;
-  height: 64px;
-  left: 607px;
-  overflow: hidden;
-  position: absolute;
-  top: 250px;
-  width: 227px;
+  top: 1040px;
+  width: 1210px;
 }
 
 .startseite .text-wrapper-2 {
@@ -148,7 +170,7 @@
   font-size: 20px;
   font-weight: 600;
   height: 26px;
-  left: 47px;
+  left: 19px;
   letter-spacing: 0;
   line-height: 26px;
   position: absolute;
@@ -159,124 +181,57 @@
 .startseite .text-wrapper-3 {
   color: #000000;
   font-family: "Newsreader-Regular", Helvetica;
-  font-size: 64px;
+  font-size: 60px;
   font-weight: 400;
-  left: 217px;
+  left: 210px;
   letter-spacing: -1.28px;
   line-height: 76.8px;
   position: absolute;
   text-align: center;
-  top: 10px;
   width: 1020px;
 }
 
-.startseite .header {
-  background-color: transparent;
-  height: 112px;
+.startseite .overlap {
+  height: 137px;
   left: 0;
   position: absolute;
-  top: 0;
+  top: 1951px;
   width: 1440px;
 }
 
-.startseite .cart-button {
-  background-color: #426b1f;
-  border-radius: 8px;
-  height: 48px;
-  left: 1218px;
-  overflow: hidden;
+.startseite .rectangle {
+  background-color: #339901;
+  height: 136px;
+  left: 0;
   position: absolute;
-  top: 32px;
-  width: 126px;
+  top: 1px;
+  width: 1440px;
 }
 
-.startseite .text-wrapper-4 {
-  color: #ffffff;
-  font-family: "Inter-SemiBold", Helvetica;
-  font-size: 16px;
-  font-weight: 600;
-  height: 21px;
-  left: 24px;
-  letter-spacing: 0;
-  line-height: 20.8px;
-  position: absolute;
-  text-align: center;
-  top: 12px;
-  white-space: nowrap;
-}
-
-.startseite .text-wrapper-5 {
+.startseite .WIFI-dornbirn {
   color: #000000;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 16px;
-  font-weight: 400;
-  height: 21px;
-  left: 1107px;
-  letter-spacing: 0;
-  line-height: 20.8px;
-  position: absolute;
-  text-align: center;
-  top: 44px;
-  white-space: nowrap;
-}
-
-.startseite .text-wrapper-6 {
-  color: #000000;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 16px;
-  font-weight: 400;
-  height: 20px;
-  left: 1003px;
-  letter-spacing: 0;
-  line-height: 20.8px;
-  position: absolute;
-  text-align: center;
-  top: 45px;
-  white-space: nowrap;
-  width: 73px;
-}
-
-.startseite .text-wrapper-7 {
-  color: #000000;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 16px;
-  font-weight: 400;
-  height: 21px;
-  left: 882px;
-  letter-spacing: 0;
-  line-height: 20.8px;
-  position: absolute;
-  text-align: center;
-  top: 45px;
-  white-space: nowrap;
-}
-
-.startseite .text-wrapper-8 {
-  color: #000000;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 16px;
-  font-weight: 400;
-  height: 21px;
-  left: 777px;
-  letter-spacing: 0;
-  line-height: 20.8px;
-  position: absolute;
-  text-align: center;
-  top: 44px;
-  white-space: nowrap;
-}
-
-.startseite .text-wrapper-9 {
-  color: #426b1f;
-  font-family: "Newsreader-Medium", Helvetica;
-  font-size: 32px;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 14px;
   font-weight: 500;
-  left: 96px;
-  letter-spacing: -0.32px;
-  line-height: 32px;
+  left: 587px;
+  letter-spacing: -0.14px;
+  line-height: 22.4px;
   position: absolute;
-  top: 40px;
-  white-space: nowrap;
+  text-align: center;
+  top: 30px;
+  width: 265px;
+}
+
+.startseite .impressum-kontakte {
+  color: #000000;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 24px;
+  font-weight: 600;
+  left: 559px;
+  letter-spacing: 0.96px;
+  line-height: 38.4px;
+  position: absolute;
+  top: 0;
 }
 
 </style>

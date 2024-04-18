@@ -1,21 +1,21 @@
 <template>
   <form @submit.prevent="handleSubmit" class="signup-form">
-    <h3>Sign up</h3>
+    <h3>Registrieren</h3>
 
-    <label for="email">Email:</label>
+    <label for="email">E-Mail:</label>
     <input type="email" name="email" v-model="email" required>
 
-    <label for="password">Password:</label>
+    <label for="password">Passwort:</label>
     <input type="password" name="password" v-model="password" required>
 
-    <button>Sign up</button>
+    <button>Registrieren</button>
     <div v-if="error" class="error-message">{{ error }}</div>
   </form>
 </template>
 
 <script>
 //Importe
-import { ref} from 'vue'
+import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
@@ -41,6 +41,11 @@ export default {
         error.value = err.message // Festlegung des Fehlerwerts bei einem Fehler während der Registrierung
       }
     }
+
+  
+
+    
+    
   // Rückgabe der erforderlichen Werte und Funktionen für die Verwendung im Template 
   //(unter anderem damit der Error auf der Website ausgegeben werden kann)
     return { handleSubmit, email, password, error }

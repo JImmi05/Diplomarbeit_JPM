@@ -4,7 +4,7 @@
     <template v-if="authIsReady">
       <!-- für alle User -->
       <div>
-        <router-link to="/">Home</router-link>
+        <router-link to="/">Startseite</router-link>
       </div>
       <div>
         <router-link to="/anleitungen">Anleitung</router-link>
@@ -12,13 +12,13 @@
       <!-- für eingeloggte User -->
       <div v-if="user">       <!-- Ist der User eingeloggt? Erst wenn "ja" wird Inhalt angezeigt-->
         <router-link to="/aufgaben">Aufgaben</router-link>
-        <span>Logged in as {{ user.email }}</span>  <!-- {{ user.email }}: nimmt die E-Mail aus dem User-Objekt heraus und zeigt diese an-->
-        <button class="button"  @click="handleClick">Logout</button>
+        <span>Eingeloggt als {{ user.email }}</span>  <!-- {{ user.email }}: nimmt die E-Mail aus dem User-Objekt heraus und zeigt diese an-->
+        <button class="button"  @click="handleClick">Abmelden</button>
       </div>
       <!-- für ausgeloggte User -->
       <div v-if="!user">    <!-- Ist der User eingeloggt? Erst wenn "nein" (! steht für nicht) wird Inhalt angezeigt-->
-        <router-link to="/login">Login</router-link>
-        <router-link to="/signup">Signup</router-link>
+        <router-link to="/login">Anmelden</router-link>
+        <router-link to="/signup">Registrieren</router-link>
       </div>
     </template>
   </nav>

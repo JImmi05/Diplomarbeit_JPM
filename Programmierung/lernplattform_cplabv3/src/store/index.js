@@ -1,89 +1,362 @@
 import { createStore } from 'vuex'
+import { getFirestore, doc, updateDoc, setDoc, getDoc, collection, getDocs } from 'firebase/firestore';
 
-// firebase Importe
+// Firebase Importe
 import { auth } from '../firebase/config'
 import {
-  createUserWithEmailAndPassword, //registrierungs-Funktion
-  signInWithEmailAndPassword,     //sign-in-Funktion
-  signOut,                        //signOut-Funktion
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
   onAuthStateChanged
 } from 'firebase/auth'
 
-const store = createStore({   //Hier wird der Authentifizierungsspeicher angelegt
-  state: {                    //state:  verfolgt den Status des Users
-    user: null,               /*dieser wird am Anfang auf null gestzt. Das heißt der User 
-                              ist nicht angemeldet*/
-    authIsReady: false        //Bis wir wissen ob der User ein oder ausgeloggt ist die Authentifizierung nicht bereit
+const store = createStore({
+  state: {
+    user: null,
+    authIsReady: false,
+    userUID: null,
+    tasks: []
   },
-  mutations: {                    //mutations: wird verwendet um etwas zu updaten
-    setUser(state, payload) {     /*payload: wenn eingeloggt: ist das User-Objekt. Dieses 
-                                    beiinhaltet alle Daten des users (Email, Passwort,etc.)
-                                             wenn ausgeloggt: beträgt null*/
-      state.user = payload        //Setzt den Benutzerzustand auf die übergebene Payload
-      console.log('user state changed:', state.user)
+  mutations: {
+    setUser(state, payload) {
+      state.user = payload;
+      console.log('user state changed:', state.user);
     },
-    setAuthIsReady(state, payload) {  /* in diesem Fall ist die payload true oder false
-                                      da es nur aufgerufen wird wenn die Authentifizierung bereit ist, ist es immer true*/
-      state.authIsReady = payload     
+    setUserUID(state, uid) {
+      state.userUID = uid;
+      console.log('User UID set to:', uid);
+    },
+    setAuthIsReady(state, payload) {
+      state.authIsReady = payload;
+    },
+    setTasks(state, tasks) {
+      state.tasks = tasks;
+      console.log('Tasks set in Vuex store:', tasks);
+    },
+    updateTaskProgress(state, { taskId, progress }) {
+      const taskIndex = state.tasks.findIndex(task => task.id === taskId);
+      if (taskIndex !== -1) {
+        state.tasks[taskIndex].progress = progress;
+      }
     }
   },
   actions: {
-    async signup(context, { email, password }) { //Definition der Aktion "signup"
-                                                 /*context: Ist ein Objekt das verschieden Methoden
-                                                            und Eigenschaften enthält die benötigt werden*/
-      console.log('signup action')
-
-      // Versuche, einen Benutzer mit der bereitgestellten E-Mail und dem Passwort zu registrieren
-      // await: warte bis die Funktion fertig ist befor du im code weitergehst
-      // hat es funktioniert wird email und passwort in 'res' gespeichert, sonst ist 'res' leer
-      const res = await createUserWithEmailAndPassword(auth, email, password)
-
-      // Überprüfe, ob die Registrierung erfolgreich war (ob 'res' einen Wert enthält)
-      if (res) {
-        // Wenn die Registrierung erfolgreich war, aktualisiere den Benutzer im Vuex-Store
-        context.commit('setUser', res.user) // Aktualisiere den Benutzer im Store mit den Benutzerdaten aus der Antwort
-      } else {
-        // Wenn die Registrierung fehlschlägt, wirf einen Fehler mit einer entsprechenden Fehlermeldung
-        throw new Error('could not complete signup')
+    //Funktion zum Registrieren eines Benutzers
+    async signup(context, { email, password }) {
+      console.log('signup action');
+    
+      try {
+        //Benutzer mit E-Mail und Passwort erstellen
+        const authRes = await createUserWithEmailAndPassword(auth, email, password);
+        const user = authRes.user;
+    
+        // Benutzerdaten in Firestore speichern
+        const db = getFirestore();
+        const userDocRef = doc(db, 'users', user.uid);
+        await setDoc(userDocRef, { email });
+    
+        // Beispiel: Erstellen von Aufgaben für den neuen Benutzer
+        const tasksCollectionRef = collection(db, 'users', user.uid, 'tasks');
+        // Feste Aufgaben-IDs für die Aufgaben und Fortschritt von "progress: 0"
+        await setDoc(doc(tasksCollectionRef, 'E7jR9ufXzLp5ah2qKbW3'), { name: 'Task1', progress: 0 });
+        await setDoc(doc(tasksCollectionRef, 'MY6m4tsFKn2twm8qKabW'), { name: 'Task2', progress: 0 });
+        await setDoc(doc(tasksCollectionRef, 'Hx4m8tkFVn2wLb6sQaZ9'), { name: 'Task3', progress: 0 });
+        await setDoc(doc(tasksCollectionRef, 'P3n7qsRGyJt5wm2aKbW8'), { name: 'Task4', progress: 0 });
+        await setDoc(doc(tasksCollectionRef, 'Tc2x5jpYgHw9Ln4qKsF6'), { name: 'Task5', progress: 0 });
+    
+        // Benutzerdaten im Store aktualisieren
+        context.commit('setUser', user);
+        context.commit('setUserUID', user.uid);
+      } catch (error) {
+        throw new Error('could not complete signup');
       }
     },
     async login(context, { email, password }) {
-      console.log('login action')
+      console.log('login action', email);
 
-      const res = await signInWithEmailAndPassword(auth, email, password)
+      const res = await signInWithEmailAndPassword(auth, email, password);
       if (res) {
-        context.commit('setUser', res.user)
+        context.commit('setUser', res.user);
+        context.commit('setUserUID', res.user.uid);
       } else {
-        throw new Error('could not complete login')
+        throw new Error('could not complete login');
       }
     },
     async logout(context) {
-      console.log('logout action')
- 
-      await signOut(auth)               // logout Funktion (benötigt nur auth)
-      context.commit('setUser', null)   // Aktualisiere den Benutzer im Store mit null
+      console.log('logout action');
+
+      await signOut(auth);
+
+      context.commit('setUser', null);
+      context.commit('setUserUID', null);
+    },
+    async fetchTasks({ state, commit }) {
+      try {
+        // Firestore-Instanz abrufen
+        const db = getFirestore();
+        // Referenz auf die Aufgabenkollektion des aktuellen Benutzers in Firestore erstellen
+        const tasksCollectionRef = collection(db, 'users', state.userUID, 'tasks');
+        // Aufgaben aus der Datenbank abrufen
+        const querySnapshot = await getDocs(tasksCollectionRef);
+        const tasks = [];
+
+        // Durchlauft jedes Dokument im Abfrage-Snapshot und fügt es zur Aufgabenliste hinzu
+        querySnapshot.forEach(doc => {
+          tasks.push({ id: doc.id, ...doc.data() });
+        });
+
+        // Aktualisiere den Vuex-Store mit den abgerufenen Aufgaben
+        commit('setTasks', tasks);
+      } catch (error) {
+
+        // Fehlerbehandlung im Falle eines Fehlers beim Abrufen der Aufgaben
+        console.error('Error fetching tasks:', error);
+      }
+    },
+    // Diese Funktion erhöht den Fortschritt der ersten Aufgabe um 25 % im Store und in der Firestore-Datenbank.
+    // Sie wird verwendet, um den Fortschritt einer bestimmten Aufgabe zu aktualisieren.
+    async increaseTask1Progress({ state, commit }) {
+      try {
+        // Definiere die ID der Aufgabe, deren Fortschritt erhöht werden soll (Hier ID der Aufgabe 1)
+        const taskId = 'E7jR9ufXzLp5ah2qKbW3';
+        // Zugriff auf die Firestore-Datenbank
+        const db = getFirestore();
+        // Referenz zum Dokument der Aufgabe in der Firestore-Datenbank
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        // Abrufen der Aufgabe aus der Firestore-Datenbank
+        const taskDocSnap = await getDoc(taskDocRef);
+
+        // Überprüfen, ob das Dokument existiert
+        if (taskDocSnap.exists()) {
+           // Aktuellen Fortschritt der Aufgabe aus dem Snapshot abrufen
+          const currentProgress = taskDocSnap.data().progress || 0;
+          // Neuen Fortschritt berechnen, indem 25 % zum aktuellen Fortschritt hinzugefügt werden (max. 100%)
+          const newProgress = Math.min(100, currentProgress + 25);
+          // Aktualisieren des Fortschritts in der Firestore-Datenbank
+          await updateDoc(taskDocRef, { progress: newProgress });
+          // Aktualisieren des Fortschritts im Vuex Store
+          commit('updateTaskProgress', { taskId, progress: newProgress });
+        }
+      } catch (error) {
+        // Fehlerbehandlung, falls ein Fehler auftritt
+        console.error('Error increasing task 1 progress:', error);
+      }
+    },
+    async decreaseTask1Progress({ state, commit }) {
+      try {
+        const taskId = 'E7jR9ufXzLp5ah2qKbW3'; // ID der Aufgabe 1
+        const db = getFirestore();
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        const taskDocSnap = await getDoc(taskDocRef);
+        if (taskDocSnap.exists()) {
+          const currentProgress = taskDocSnap.data().progress || 0;
+          const newProgress = Math.max(0, currentProgress - 25);
+          await updateDoc(taskDocRef, { progress: newProgress });
+          commit('updateTaskProgress', { taskId, progress: newProgress });
+        }
+      } catch (error) {
+        console.error('Error decreasing task 1 progress:', error);
+      }
+    },
+    async resetTask1Progress({ state, commit }) {
+      try {
+
+        const taskId = 'E7jR9ufXzLp5ah2qKbW3'; // ID der Aufgabe 1
+        const db = getFirestore();
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        // Fortschritt der Aufgabe 1 in der Firestore-Datenbank auf 0 setzen
+        await updateDoc(taskDocRef, { progress: 0 });
+         // Fortschritt im Vuex Store aktualisieren
+        commit('updateTaskProgress', { taskId, progress: 0 });
+      } catch (error) {
+        console.error('Error resetting task 1 progress:', error);
+      }
+    },
+    async increaseTask2Progress({ state, commit }) {
+      try {
+        const taskId = 'MY6m4tsFKn2twm8qKabW';
+        const db = getFirestore();
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        const taskDocSnap = await getDoc(taskDocRef);
+        if (taskDocSnap.exists()) {
+          const currentProgress = taskDocSnap.data().progress || 0;
+          const newProgress = Math.min(100, currentProgress + 25);
+          await updateDoc(taskDocRef, { progress: newProgress });
+          commit('updateTaskProgress', { taskId, progress: newProgress });
+        }
+      } catch (error) {
+        console.error('Error increasing task 1 progress:', error);
+      }
+    },
+    async decreaseTask2Progress({ state, commit }) {
+      try {
+        const taskId = 'MY6m4tsFKn2twm8qKabW';
+        const db = getFirestore();
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        const taskDocSnap = await getDoc(taskDocRef);
+        if (taskDocSnap.exists()) {
+          const currentProgress = taskDocSnap.data().progress || 0;
+          const newProgress = Math.max(0, currentProgress - 25);
+          await updateDoc(taskDocRef, { progress: newProgress });
+          commit('updateTaskProgress', { taskId, progress: newProgress });
+        }
+      } catch (error) {
+        console.error('Error decreasing task 1 progress:', error);
+      }
+    },
+    async resetTask2Progress({ state, commit }) {
+      try {
+        const taskId = 'MY6m4tsFKn2twm8qKabW';
+        const db = getFirestore();
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        await updateDoc(taskDocRef, { progress: 0 }); // Fortschritt auf 0 setzen
+        commit('updateTaskProgress', { taskId, progress: 0 }); // Fortschritt im Store aktualisieren
+      } catch (error) {
+        console.error('Error resetting task 1 progress:', error);
+      }
+    },
+    async increaseTask3Progress({ state, commit }) {
+      try {
+        const taskId = 'Hx4m8tkFVn2wLb6sQaZ9';
+        const db = getFirestore();
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        const taskDocSnap = await getDoc(taskDocRef);
+        if (taskDocSnap.exists()) {
+          const currentProgress = taskDocSnap.data().progress || 0;
+          const newProgress = Math.min(100, currentProgress + 25);
+          await updateDoc(taskDocRef, { progress: newProgress });
+          commit('updateTaskProgress', { taskId, progress: newProgress });
+        }
+      } catch (error) {
+        console.error('Error increasing task 1 progress:', error);
+      }
+    },
+    async decreaseTask3Progress({ state, commit }) {
+      try {
+        const taskId = 'Hx4m8tkFVn2wLb6sQaZ9';
+        const db = getFirestore();
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        const taskDocSnap = await getDoc(taskDocRef);
+        if (taskDocSnap.exists()) {
+          const currentProgress = taskDocSnap.data().progress || 0;
+          const newProgress = Math.max(0, currentProgress - 25);
+          await updateDoc(taskDocRef, { progress: newProgress });
+          commit('updateTaskProgress', { taskId, progress: newProgress });
+        }
+      } catch (error) {
+        console.error('Error decreasing task 1 progress:', error);
+      }
+    },
+    async resetTask3Progress({ state, commit }) {
+      try {
+        const taskId = 'Hx4m8tkFVn2wLb6sQaZ9';
+        const db = getFirestore();
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        await updateDoc(taskDocRef, { progress: 0 }); // Fortschritt auf 0 setzen
+        commit('updateTaskProgress', { taskId, progress: 0 }); // Fortschritt im Store aktualisieren
+      } catch (error) {
+        console.error('Error resetting task 1 progress:', error);
+      }
+    },
+    async increaseTask4Progress({ state, commit }) {
+      try {
+        const taskId = 'P3n7qsRGyJt5wm2aKbW8';
+        const db = getFirestore();
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        const taskDocSnap = await getDoc(taskDocRef);
+        if (taskDocSnap.exists()) {
+          const currentProgress = taskDocSnap.data().progress || 0;
+          const newProgress = Math.min(100, currentProgress + 25);
+          await updateDoc(taskDocRef, { progress: newProgress });
+          commit('updateTaskProgress', { taskId, progress: newProgress });
+        }
+      } catch (error) {
+        console.error('Error increasing task 1 progress:', error);
+      }
+    },
+    async decreaseTask4Progress({ state, commit }) {
+      try {
+        const taskId = 'P3n7qsRGyJt5wm2aKbW8';
+        const db = getFirestore();
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        const taskDocSnap = await getDoc(taskDocRef);
+        if (taskDocSnap.exists()) {
+          const currentProgress = taskDocSnap.data().progress || 0;
+          const newProgress = Math.max(0, currentProgress - 25);
+          await updateDoc(taskDocRef, { progress: newProgress });
+          commit('updateTaskProgress', { taskId, progress: newProgress });
+        }
+      } catch (error) {
+        console.error('Error decreasing task 1 progress:', error);
+      }
+    },
+    async resetTask4Progress({ state, commit }) {
+      try {
+        const taskId = 'P3n7qsRGyJt5wm2aKbW8';
+        const db = getFirestore();
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        await updateDoc(taskDocRef, { progress: 0 }); // Fortschritt auf 0 setzen
+        commit('updateTaskProgress', { taskId, progress: 0 }); // Fortschritt im Store aktualisieren
+      } catch (error) {
+        console.error('Error resetting task 1 progress:', error);
+      }
+    },
+    async increaseTask5Progress({ state, commit }) {
+      try {
+        const taskId = 'Tc2x5jpYgHw9Ln4qKsF6';
+        const db = getFirestore();
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        const taskDocSnap = await getDoc(taskDocRef);
+        if (taskDocSnap.exists()) {
+          const currentProgress = taskDocSnap.data().progress || 0;
+          const newProgress = Math.min(100, currentProgress + 25);
+          await updateDoc(taskDocRef, { progress: newProgress });
+          commit('updateTaskProgress', { taskId, progress: newProgress });
+        }
+      } catch (error) {
+        console.error('Error increasing task 1 progress:', error);
+      }
+    },
+    async decreaseTask5Progress({ state, commit }) {
+      try {
+        const taskId = 'Tc2x5jpYgHw9Ln4qKsF6';
+        const db = getFirestore();
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        const taskDocSnap = await getDoc(taskDocRef);
+        if (taskDocSnap.exists()) {
+          const currentProgress = taskDocSnap.data().progress || 0;
+          const newProgress = Math.max(0, currentProgress - 25);
+          await updateDoc(taskDocRef, { progress: newProgress });
+          commit('updateTaskProgress', { taskId, progress: newProgress });
+        }
+      } catch (error) {
+        console.error('Error decreasing task 1 progress:', error);
+      }
+    },
+    async resetTask5Progress({ state, commit }) {
+      try {
+        const taskId = 'Tc2x5jpYgHw9Ln4qKsF6';
+        const db = getFirestore();
+        const taskDocRef = doc(db, 'users', state.userUID, 'tasks', taskId);
+        await updateDoc(taskDocRef, { progress: 0 }); // Fortschritt auf 0 setzen
+        commit('updateTaskProgress', { taskId, progress: 0 }); // Fortschritt im Store aktualisieren
+      } catch (error) {
+        console.error('Error resetting task 1 progress:', error);
+      }
+    },
+  },
+  getters: {
+    getTaskProgressById: state => taskId => {
+      const task = state.tasks.find(task => task.id === taskId);
+      return task ? task.progress : 0;
     }
   }
-})
+});
 
-// Die Funktion onAuthStateChanged wird aufgerufen, um den Authentifizierungsstatus zu überwachen
-// Sie nimmt zwei Argumente entgegen: das Authentifizierungsobjekt (auth) und eine Callback-Funktion,
-// die aufgerufen wird, wenn sich der Authentifizierungsstatus ändert
 const unsub = onAuthStateChanged(auth, (user) => {
-    /* Die Callback-Funktion erhält den aktuellen Benutzer (user) als Parameter, der entweder ein
-       Benutzerobjekt ist, wenn ein Benutzer angemeldet ist, oder null, wenn kein Benutzer angemeldet ist */
+  store.commit('setAuthIsReady', true);
+  store.commit('setUser', user);
+  unsub();
+});
 
-  // Setze den Zustand 'authIsReady' im Vuex-Store auf true
-  store.commit('setAuthIsReady', true)   
-  
-  // Setze den Benutzer im Zustand des Vuex-Stores auf den aktuellen User
-  store.commit('setUser', user)
-
-  //Beendet die Überwachung damit die Funktion nur einmal aufgerufen wird und nicht jedes mal
-  // wenn "auth" sich ändert
-  unsub()
-})
-
-
-// export the store
-export default store
+export default store;
