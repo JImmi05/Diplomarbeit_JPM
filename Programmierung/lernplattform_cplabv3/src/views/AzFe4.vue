@@ -8,18 +8,17 @@
         <div class="text-wrapper-2">Letzte Aktualisierung: 17.02.2024</div>
         <button class="button1" @click="handleClick"> Zurück </button>
         <button class="button2" @click="handleClick2"> Weiter </button>
-        <div class="schritttitel">Schritt 1: Starten des Förderbands</div>
+        <div class="schritttitel">Schritt 4: Vollständiger Bohrvorgang</div>
         <div class="schritt2">
-Erklärung der Funktion: Das Förderband ist eine mechanische Vorrichtung, die dazu dient, Gegenstände von einem Ort zum anderen zu transportieren. Es besteht aus einer endlosen Schleife von Riemen oder Rollen, die von einer Antriebseinheit angetrieben werden.
-Anweisung: Starten Sie das Förderband mithilfe der entsprechenden Steuerungseinheit. (z. B. durch Betätigen eines Schalters oder einer Schaltfläche auf dem Bedienfeld)
+Dies ist der letzte Schritt, um einen vollständigen Bohrvorgang zu erstellen. Am Ende dieses Schritts sollte es möglich sein,
+          dass ein Bauteil auf dem Förderband transportiert wird, bis es die Position unter dem Bohrer erreicht. Dort soll es einen Näherungsschalter auslösen,
+          der gleichzeitig das Förderband anhält, sowie einen 2-sekündigen Bohrvorgang durchführt, bevor es den Bohrer wieder anhebt und das Bauteil auf dem Förderband
+          weiter tranportiert wird. 
         </div>
-        <img class="schrittimg" src="../assets/Test.jpg" />
         <div class="schritt2">
-Erklärung der Funktion: Das Förderband ist eine mechanische Vorrichtung, die dazu dient, Gegenstände von einem Ort zum anderen zu transportieren. Es besteht aus einer endlosen Schleife von Riemen oder Rollen, die von einer Antriebseinheit angetrieben werden.
-Anweisung: Starten Sie das Förderband mithilfe der entsprechenden Steuerungseinheit. (z. B. durch Betätigen eines Schalters oder einer Schaltfläche auf dem Bedienfeld)
+Anleitung: Theoretisch müssten nur die Anschlüsse aus den vorherhigen Schritten übernommen werden und die Logik erweitert werden, um die
+          Funktionalitäten zu verbinden. Es werden keine neuen Digital-I/O-Module benötigt.
         </div>
-        <img class="schrittimg" src="../assets/Test.jpg" />
-        <!-- Weitere Inhalte hier -->
       </div>
       <div class="page-heading">
         <div class="frame">

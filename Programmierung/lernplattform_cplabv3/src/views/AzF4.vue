@@ -13,13 +13,10 @@
 Erklärung der Funktion: Das Förderband ist eine mechanische Vorrichtung, die dazu dient, Gegenstände von einem Ort zum anderen zu transportieren. Es besteht aus einer endlosen Schleife von Riemen oder Rollen, die von einer Antriebseinheit angetrieben werden.
 Anweisung: Starten Sie das Förderband mithilfe der entsprechenden Steuerungseinheit. (z. B. durch Betätigen eines Schalters oder einer Schaltfläche auf dem Bedienfeld)
         </div>
-        <img class="schrittimg" src="../assets/Test.jpg" />
         <div class="schritt2">
 Erklärung der Funktion: Das Förderband ist eine mechanische Vorrichtung, die dazu dient, Gegenstände von einem Ort zum anderen zu transportieren. Es besteht aus einer endlosen Schleife von Riemen oder Rollen, die von einer Antriebseinheit angetrieben werden.
 Anweisung: Starten Sie das Förderband mithilfe der entsprechenden Steuerungseinheit. (z. B. durch Betätigen eines Schalters oder einer Schaltfläche auf dem Bedienfeld)
         </div>
-        <img class="schrittimg" src="../assets/Test.jpg" />
-        <!-- Weitere Inhalte hier -->
       </div>
       <div class="page-heading">
         <div class="frame">

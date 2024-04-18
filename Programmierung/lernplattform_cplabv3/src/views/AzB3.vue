@@ -10,16 +10,15 @@
         <button class="button2" @click="handleClick2"> Weiter </button>
         <div class="schritttitel">Schritt 1: Starten des Förderbands</div>
         <div class="schritt2">
-Erklärung der Funktion: Das Förderband ist eine mechanische Vorrichtung, die dazu dient, Gegenstände von einem Ort zum anderen zu transportieren. Es besteht aus einer endlosen Schleife von Riemen oder Rollen, die von einer Antriebseinheit angetrieben werden.
-Anweisung: Starten Sie das Förderband mithilfe der entsprechenden Steuerungseinheit. (z. B. durch Betätigen eines Schalters oder einer Schaltfläche auf dem Bedienfeld)
+In diesem Schritt soll die Steuerung des Förderbands erstellt werden. Das Förderband soll eingeschaltet sein, bis der Näherungsschalter
+          auslöst. Somit fährt das Förderband, bis das Bauteil, dass den Näherungsschalter auslöst, die richtige Position erreicht hat. Dies ermöglicht es,
+          später einen kompletten Bohrvorgang zu simulieren.
         </div>
-        <img class="schrittimg" src="../assets/Test.jpg" />
         <div class="schritt2">
-Erklärung der Funktion: Das Förderband ist eine mechanische Vorrichtung, die dazu dient, Gegenstände von einem Ort zum anderen zu transportieren. Es besteht aus einer endlosen Schleife von Riemen oder Rollen, die von einer Antriebseinheit angetrieben werden.
-Anweisung: Starten Sie das Förderband mithilfe der entsprechenden Steuerungseinheit. (z. B. durch Betätigen eines Schalters oder einer Schaltfläche auf dem Bedienfeld)
+Anleitung: Verbinde ein weiteres Digital-I/O-Modul mit dem Tec2Screen®-Connect. Konfiguriere einen Ausgang, un verbinde diesen mit einem
+          schwarzen Sicherheitskabel mit der Sicherheitsbuchse, die das Förderband einschaltet. Programmiere mithilfe des Eingangs des Näherungsschalters
+          die notwendige Logik, um das Förderband beim Auslösen des Näherungsschalters für 2 Sekunden anzuhalten.
         </div>
-        <img class="schrittimg" src="../assets/Test.jpg" />
-        <!-- Weitere Inhalte hier -->
       </div>
       <div class="page-heading">
         <div class="frame">

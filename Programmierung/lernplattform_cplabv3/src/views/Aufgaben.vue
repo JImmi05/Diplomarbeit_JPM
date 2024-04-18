@@ -41,7 +41,6 @@
       <router-link :to="getAufgabenRoute3()">
         <div class="aufgabe-3">
           <div class="text-wrapper-10">In dieser Aufgabe werden die Grundfunktionen des Förderbandes bearbeitet</div>
-          <div class="text-wrapper-11">Aufwand: ca. 0.5h</div>
           <div class="text-wrapper-12">Förderband</div>
           <button class="resetButton" v-if="isTask3Completed" @click="resetTask3Progress">Aufgabe erneut machen</button>
           <img class="img" alt="Fkphulv m" src="../assets/Förderband.png" />
@@ -51,7 +50,6 @@
       <router-link :to="getAufgabenRoute4()">
         <div class="aufgabe">
           <div class="text-wrapper-10">In dieser Aufgabe werden die Grundfunktionen des Bohrstation bearbeitet</div>
-          <div class="text-wrapper-11">Aufwand: ca. 1h</div>
           <div class="text-wrapper-12">Bohrstation</div>
           <button class="resetButton" v-if="isTask4Completed" @click="resetTask4Progress">Aufgabe erneut machen</button>
           <img class="img" alt="Fkphulv m" src="../assets/Bohrstation.png" />
@@ -61,7 +59,6 @@
       <router-link :to="getAufgabenRoute5()">
         <div class="aufgabe-2">
           <div class="text-wrapper-10">In dieser Aufgabe werden alle Komponenten verwendet</div>
-          <div class="text-wrapper-11">Aufwand: ca. 2h</div>
           <div class="text-wrapper-12">Aufgabe Komplett</div>
           <button class="resetButton" v-if="isTask5Completed" @click="resetTask5Progress">Aufgabe erneut machen</button>
           <img class="img" alt="Fkphulv m" src="../assets/Lernstation.png" />
@@ -276,6 +273,8 @@ export default {
     
   }
 };
+
+
 </script>
 
 <style>

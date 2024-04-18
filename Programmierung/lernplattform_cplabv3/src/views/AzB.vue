@@ -10,16 +10,18 @@
         <button class="button2" @click="handleClick2"> Weiter </button>
         <div class="schritttitel">Schritt 1: Starten des Förderbands</div>
         <div class="schritt2">
-Erklärung der Funktion: Das Förderband ist eine mechanische Vorrichtung, die dazu dient, Gegenstände von einem Ort zum anderen zu transportieren. Es besteht aus einer endlosen Schleife von Riemen oder Rollen, die von einer Antriebseinheit angetrieben werden.
-Anweisung: Starten Sie das Förderband mithilfe der entsprechenden Steuerungseinheit. (z. B. durch Betätigen eines Schalters oder einer Schaltfläche auf dem Bedienfeld)
+                In diesem Schritt soll der Bohrer permanent oben gehalten werden. Dies gilt als Grundlage der meisten Programme der Bohrstation,
+                da die Ausgangsposition des Bohrers "Oben" ist, sodass
+                Bauteile ungehindert unter der Bohrstation durchfahren können.
+                Um den Bohrer oben zu halten, müssen wir das zuständige Pneumatikventil auf Spannung legen, sodass die Druckluft im pneumatisch
+                betätigten Zylinder den Bohrer nach oben drückt.
         </div>
-        <img class="schrittimg" src="../assets/Test.jpg" />
         <div class="schritt2">
-Erklärung der Funktion: Das Förderband ist eine mechanische Vorrichtung, die dazu dient, Gegenstände von einem Ort zum anderen zu transportieren. Es besteht aus einer endlosen Schleife von Riemen oder Rollen, die von einer Antriebseinheit angetrieben werden.
-Anweisung: Starten Sie das Förderband mithilfe der entsprechenden Steuerungseinheit. (z. B. durch Betätigen eines Schalters oder einer Schaltfläche auf dem Bedienfeld)
+                Anleitung: Stecke ein Digital-I/O-Modul in einen dafür vorhergesehenen Steckplatz auf dem Tec2Screen®-Connect.
+                Konfiguriere eine der Sicherheitsbuchsen auf Ausgang, und eine auf Eingang. Verwende ein schwarzes Sicherheitskabel,
+                um den Ausgang mit der Buchse auf dem Tableu, die den Zylinder betätigt, zu verbinden. Anschließend soll mit Logik-Bausteinen
+                die gewünschte Funktion programmiert werden.
         </div>
-        <img class="schrittimg" src="../assets/Test.jpg" />
-        <!-- Weitere Inhalte hier -->
       </div>
       <div class="page-heading">
         <div class="frame">
