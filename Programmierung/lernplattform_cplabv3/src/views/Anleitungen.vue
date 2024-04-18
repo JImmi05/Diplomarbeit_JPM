@@ -2,34 +2,34 @@
     <div class="anleitungen-seite">
       <div class="div">
         <router-link to="/IdBu"><div class="anleitung">
-          <p class="text-wrapper">Anleitung zur den verschiedenen Buchsen der Sensoren</p>
+          <p class="text-wrapper">Funktionen und Aufgaben der Bohrstation</p>
           <div class="text-wrapper-2">Anleitung der Buchsen</div>
-          <img class="image" alt="Image" src="../assets/SkillsConveyor.jpg" />
+          <img class="image" alt="Image" src="../assets/Bohrstation.png" />
         </div></router-link>
         <router-link to="/IdB"><div class="anleitung-2">
-          <p class="p">Anleitung zur Installation der Bohrstation auf unsere Lenrplattform</p>
+          <p class="p">Funktionen und Aufgaben des Förderbandes</p>
           <div class="text-wrapper-2">Installation der Bohrstation</div>
-          <img class="img" alt="Image" src="../assets/Bohrstation.png" />
+          <img class="img" alt="Image" src="../assets/Förderband.png" />
         </div></router-link>
         <router-link to="/IdF"><div class="anleitung-3">
-          <p class="text-wrapper-3">Anleitung zur Installation des Förderbandes auf unsere Lenrplattform</p>
+          <p class="text-wrapper-3">Der richtige Umgang mit dem Festo Tablet</p>
           <div class="text-wrapper-2">Installation des Förderbandes</div>
-          <img class="image-2" alt="Image" src="../assets/vetter_kleinförderband.jpg" />
+          <img class="image-2" alt="Image" src="../assets/Festo_Tablet.jpg" />
         </div></router-link>
         <router-link to="/IdBu"><div class="anleitung-4">
-          <p class="text-wrapper">Anleitung zur den verschiedenen Buchsen der Sensoren</p>
+          <p class="text-wrapper">Anleitung zur Verkabelung unserer Lernstation</p>
           <div class="text-wrapper-2">Anleitung der Buchsen</div>
-          <img class="image" alt="Image" src="../assets/SkillsConveyor.jpg" />
+          <img class="image" alt="Image" src="../assets/Lernstation.png" />
         </div></router-link>
         <router-link to="/IdB"><div class="anleitung-5">
-          <p class="p">Anleitung zur Installation der Bohrstation auf unsere Lenrplattform</p>
+          <p class="p">Anleitung zur den verschiedenen Buchsen der Sensoren & Aktoren</p>
           <div class="text-wrapper-2">Installation der Bohrstation</div>
-          <img class="img" alt="Image" src="../assets/Bohrstation.png" />
+          <img class="img" alt="Image" src="../assets/Förderband.png" />
         </div></router-link>
         <router-link to="/IdF"><div class="anleitung-6">
-          <p class="text-wrapper-3">Anleitung zur Installation des Förderbandes auf unsere Lenrplattform</p>
+          <p class="text-wrapper-3">Anleitung zur Befestigung der Bohrstation auf der Lernstation</p>
           <div class="text-wrapper-2">Installation des Förderbandes</div>
-          <img class="image-2" alt="Image" src="../assets/vetter_kleinförderband.jpg" />
+          <img class="image-2" alt="Image" src="../assets/Standfüße.jpg" />
         </div></router-link>
         <div class="page-heading">
           <div class="text-wrapper-4">Anleitungen</div>
@@ -74,7 +74,7 @@
   }
   
   .anleitungen-seite .text-wrapper {
-    color: #426b1f;
+    color: #339901;
     font-family: "Inter-SemiBold", Helvetica;
     font-size: 20px;
     font-weight: 600;
@@ -82,8 +82,8 @@
     letter-spacing: 0;
     line-height: 26px;
     position: absolute;
-    top: 348px;
-    width: 358px;
+    top: 320px;
+    width: 350px;
   }
   
   .anleitungen-seite .text-wrapper-2 {
@@ -122,7 +122,7 @@
   }
   
   .anleitungen-seite .p {
-    color: #426b1f;
+    color: #339901;
     font-family: "Inter-SemiBold", Helvetica;
     font-size: 20px;
     font-weight: 600;
@@ -130,12 +130,12 @@
     letter-spacing: 0;
     line-height: 26px;
     position: absolute;
-    top: 348px;
-    width: 310px;
+    top: 320px;
+    width: 350px;
   }
   
   .anleitungen-seite .img {
-    height: 274px;
+    height: 304px;
     left: 0;
     object-fit: cover;
     position: absolute;
@@ -157,7 +157,7 @@
   }
   
   .anleitungen-seite .text-wrapper-3 {
-    color: #426b1f;
+    color: #339901;
     font-family: "Inter-SemiBold", Helvetica;
     font-size: 20px;
     font-weight: 600;
@@ -165,12 +165,12 @@
     letter-spacing: 0;
     line-height: 26px;
     position: absolute;
-    top: 348px;
-    width: 351px;
+    top: 320px;
+    width: 350px;
   }
   
   .anleitungen-seite .image-2 {
-    height: 237px;
+    height: 304px;
     left: 0;
     object-fit: cover;
     position: absolute;

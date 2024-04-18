@@ -1,0 +1,152 @@
+<template>
+  <div class="news">
+    <div class="div">
+      <div class="aufgabe">
+        <div class="fortschritt">
+        <div> Aufgabenfortschritt des Benutzers: {{ getTaskProgressById('Tc2x5jpYgHw9Ln4qKsF6') }}%</div>
+        </div>
+        <div class="text-wrapper-2">Letzte Aktualisierung: 17.02.2024</div>
+        <button class="button1" @click="handleClick"> Zurück </button>
+        <button class="button2" @click="handleClick2"> Weiter </button>
+        <div class="schritttitel">Schritt 1: Starten des Förderbands</div>
+        <div class="schritt2">
+Erklärung der Funktion: Das Förderband ist eine mechanische Vorrichtung, die dazu dient, Gegenstände von einem Ort zum anderen zu transportieren. Es besteht aus einer endlosen Schleife von Riemen oder Rollen, die von einer Antriebseinheit angetrieben werden.
+Anweisung: Starten Sie das Förderband mithilfe der entsprechenden Steuerungseinheit. (z. B. durch Betätigen eines Schalters oder einer Schaltfläche auf dem Bedienfeld)
+        </div>
+        <img class="schrittimg" src="../assets/Test.jpg" />
+        <div class="schritt2">
+Erklärung der Funktion: Das Förderband ist eine mechanische Vorrichtung, die dazu dient, Gegenstände von einem Ort zum anderen zu transportieren. Es besteht aus einer endlosen Schleife von Riemen oder Rollen, die von einer Antriebseinheit angetrieben werden.
+Anweisung: Starten Sie das Förderband mithilfe der entsprechenden Steuerungseinheit. (z. B. durch Betätigen eines Schalters oder einer Schaltfläche auf dem Bedienfeld)
+        </div>
+        <img class="schrittimg" src="../assets/Test.jpg" />
+        <!-- Weitere Inhalte hier -->
+      </div>
+      <div class="page-heading">
+        <div class="frame">
+          <div class="div-wrapper">
+            <div class="div-wrapper">
+              <div class="text-wrapper-3">Aufgabe Komplett</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class ="Lösung">
+      <button @click="clickLösung">Lösung</button>
+      </div>
+</template>
+
+<script>
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import { computed } from 'vue'
+
+export default {
+  setup() {
+    const router = useRouter()
+    const store = useStore()
+
+    // Fortschritt des angemeldeten Benutzers aus dem Store abrufen
+    const getTaskProgressById = computed(() => {
+      return store.getters.getTaskProgressById;
+    });
+
+    const handleClick = () => {
+      store.dispatch('decreaseTask5Progress');
+      router.push('/AK3')
+    }
+
+    const handleClick2 = () => {
+      store.dispatch('increaseTask5Progress');      
+      router.push('/Aufgaben')
+    }
+
+    const clickLösung = () => {
+      router.push('AK_Lösung')
+    }
+
+
+    return {
+      handleClick,
+      handleClick2,
+      clickLösung,
+      getTaskProgressById
+    }
+  }
+}
+</script>
+  
+  <style>
+  .news .button1{
+    position: absolute;
+    left: 22px;
+    top: 22px;
+    width: 70px;
+    height: 40px;
+    border-radius: 24px;
+  }
+
+  .news .button2{
+    position: absolute;
+    right: 22px;
+    top: 22px;
+    width: 70px;
+    height: 40px;
+    border-radius: 24px;
+  }
+
+  
+
+  .fortschritt {
+  margin-top: 0.5%;
+  margin-left: 2%;
+}
+
+.text-wrapper-2 {
+  margin-top: 120%;
+}
+
+.text-wrapper-2 {
+  margin-top: 120%;
+}
+
+.schritttitel {
+  margin-top: 5%;
+  margin-left: 2%;
+  font-weight: 600;
+}
+
+.schritt2 {
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.schrittimg {
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+  height: 500px;
+  left: 0;
+  object-fit: cover;
+  top: 0;
+  width: 1209.6px;
+}
+
+.aufgabe {
+  height: 4000px;
+}
+
+.Lösung {
+    position: absolute;
+    left: 160px;
+    top: 2300px;
+    width: 70px;
+    height: 40px;
+    border-radius: 24px;
+}
+
+
+  
+  </style>
