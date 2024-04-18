@@ -2,25 +2,18 @@
   <div class="news">
     <div class="div">
       <div class="aufgabe">
-        <div class="text-wrapper-2">Letzte Aktualisierung: 17.02.2024</div>
         <div class="overlap">
           <p class="p">
-            Schritt 1: Standortauswahl Vor Beginn der Installation wird der ideale Standort für das Förderband im Lagerhaus ausgewählt. Der Standort wird basierend auf der effizienten Bewegung von Waren, Zugänglichkeit für Arbeitskräfte und zukünftigen Lagererweiterungen festgelegt.
+            Lorem ipsum dolor sit amet
           </p>
-          <img class="image" alt="Image" src="../assets/vetter_kleinförderband.jpg" />
-        </div>
-        <div class="overlap-group">
-          <p class="p">
-            Schritt 1: Standortauswahl Vor Beginn der Installation wird der ideale Standort für das Förderband im Lagerhaus ausgewählt. Der Standort wird basierend auf der effizienten Bewegung von Waren, Zugänglichkeit für Arbeitskräfte und zukünftigen Lagererweiterungen festgelegt.
-          </p>
-          <img class="img" alt="Image" src="../assets/vetter_kleinförderband.jpg" />
+          <img class="image" alt="Image" src="../assets/Festo_Tablet.jpg" />
         </div>
       </div>
       <div class="page-heading">
         <div class="frame">
           <div class="div-wrapper">
             <div class="div-wrapper">
-              <div class="text-wrapper-3">Installation des Förderbandes</div>
+              <div class="text-wrapper-3">Umgang mit dem Tec2Screen®-Connect</div>
             </div>
           </div>
         </div>

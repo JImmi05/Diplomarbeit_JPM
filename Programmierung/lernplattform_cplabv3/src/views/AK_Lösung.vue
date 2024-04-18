@@ -4,17 +4,13 @@
       <div class="aufgabe">
         <div class="fortschritt">
         </div>
-        <div class="text-wrapper-2">Letzte Aktualisierung: 17.02.2024</div>
         <button class="button1" @click="handleClick"> Zurück </button>
-        <button class="button2" @click="handleClick2"> Weiter </button>
-        <div class="schritttitel">Schritt 1: Starten des Förderbands</div>
-        <div class="schritt2">
-          BANANE
+        <div> </div>
+        <div> </div>
+        <div class="schritt2" style="margin-top:8%">
+          Hier befindet sich ein Lösungsvorschlag für diese Aufgabe. Auf den Bildern sind der Aufbau und die Logik-Programmierung zu erkennen.
         </div>
         <img class="schrittimg" src="../assets/Verkabelung_Aufgabe_Komplett.jpg" />
-        <div class="schritt2">
-        BANANE
-        </div>
         <img class="schrittimg" src="../assets/Tablet_Aufgae_Komplett.jpg" />
         <!-- Weitere Inhalte hier -->
       </div>
@@ -121,7 +117,7 @@ export default {
 }
 
 .news .aufgabe {
-  height: 2000px;
+  height: 1800px;
 }
 
 

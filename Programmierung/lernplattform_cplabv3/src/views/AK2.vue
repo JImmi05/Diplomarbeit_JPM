@@ -1,24 +1,22 @@
 <template>
   <div class="news">
     <div class="div">
-      <div class="aufgabe">
+      <div class="aufgabe" style="height:400px">
         <div class="fortschritt">
         <div> Aufgabenfortschritt des Benutzers: {{ getTaskProgressById('Tc2x5jpYgHw9Ln4qKsF6') }}%</div>
         </div>
-        <div class="text-wrapper-2">Letzte Aktualisierung: 17.02.2024</div>
         <button class="button1" @click="handleClick"> Zurück </button>
         <button class="button2" @click="handleClick2"> Weiter </button>
-        <div class="schritttitel">Schritt 1: Starten des Förderbands</div>
+        <div class="schritttitel">Schritt 2: Bohrer absenken</div>
         <div class="schritt2">
-Erklärung der Funktion: Das Förderband ist eine mechanische Vorrichtung, die dazu dient, Gegenstände von einem Ort zum anderen zu transportieren. Es besteht aus einer endlosen Schleife von Riemen oder Rollen, die von einer Antriebseinheit angetrieben werden.
-Anweisung: Starten Sie das Förderband mithilfe der entsprechenden Steuerungseinheit. (z. B. durch Betätigen eines Schalters oder einer Schaltfläche auf dem Bedienfeld)
+          In diesem Schritt soll erreicht werden, dass sich der Bohrer absenkt, falls der Näherungsschalter unter dem Bohrer auslöst.
+          Anschließend soll der Bohrer 2 Sekunden unten bleiben, bevor er wieder angehoben wird. Dies simuliert einen Bohrvorgang, der
+          ausgelöst wird, wenn ein Bauteil auf dem Förderband die korrekte Position erreicht.
         </div>
-        <img class="schrittimg" src="../assets/Test.jpg" />
         <div class="schritt2">
-Erklärung der Funktion: Das Förderband ist eine mechanische Vorrichtung, die dazu dient, Gegenstände von einem Ort zum anderen zu transportieren. Es besteht aus einer endlosen Schleife von Riemen oder Rollen, die von einer Antriebseinheit angetrieben werden.
-Anweisung: Starten Sie das Förderband mithilfe der entsprechenden Steuerungseinheit. (z. B. durch Betätigen eines Schalters oder einer Schaltfläche auf dem Bedienfeld)
+          Anleitung: Verbinde den zuvor definierten Eingang bei dem Tec2Screen®-Connect mit der Sichreheitsbuchse, die das Ausgangssignal
+          des Näherungsschalters ausgibt. Anschließend soll mit Logik-Bausteinen die gewünschte Funktion programmiert werden.
         </div>
-        <img class="schrittimg" src="../assets/Test.jpg" />
         <!-- Weitere Inhalte hier -->
       </div>
       <div class="page-heading">
