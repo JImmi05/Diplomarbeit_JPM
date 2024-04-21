@@ -2,16 +2,17 @@
   <div class="startseite">
     <div class="div">
       <div class="overlap-group">
-        <div class="aufgabe"></div>
+        <div class="aufgabe"  style="height:1800px"></div>
         <p class="hands-on-ist-die">
-          Die Lernplattform soll eine Hilfe für die Lernenden darstellen, damit diese mit der Lernstation so einfach und effektiv wie möglich die Grundlagen der Elektrotechnik, Steuerungstechnik, Mechatronik und Automatisierungstechnik lernen können.
+          Die Lernplattform soll eine Hilfe für die Lernenden darstellen, damit diese mit der Lernstation so einfach und effektiv wie möglich die Grundlagen der Elektrotechnik, Steuerungstechnik und Automatisierungstechnik lernen können.
           <br />
           <br />
-          Modulares Lernsystem für praxisnahe Aus – und Weiterbildung, welche aufbauend auf klassischen Inhalten der
-          Elektrotechnik Kompetenzen neuer Technologien und Systeme in Kontext von Industrie 4.0 vermittelt.
-          Lernanleitung (Webseite, Videos, AR, …) in Form von Infos, aufbauenden Aufgaben und Anleitungen.
+          Ein modulares Lernsystem für praxisnahe Aus- und Weiterbildung wird entwickelt, um Kompetenzen in neuen Technologien und Systemen im Kontext von Industrie 4.0 aufzubauen. 
+          Es baut auf klassischen Inhalten der Elektrotechnik auf und bietet eine strukturierte Lernanleitung in Form von Informationen, aufbauenden Aufgaben und detaillierten Anleitungen. 
+          Dieser Ansatz ermöglicht es den Lernenden, ihr Verständnis schrittweise zu vertiefen und praktische Fähigkeiten zu entwickeln, die für die modernen Anforderungen der Industrie relevant sind.
+
         </p>
-        <div class="unser-ziel">UNSER ZIEL:</div>
+        <div class="unser-ziel">ZIEL:</div>
         <img class="image" alt="Image" src="../assets/Bohrstation_k.png" />
         <img class="img" alt="Image" src="../assets/Förderband.png" />
       </div>
@@ -160,7 +161,7 @@ export default {
   left: 59px;
   object-fit: cover;
   position: absolute;
-  top: 1040px;
+  top: 1120px;
   width: 1210px;
 }
 
@@ -204,7 +205,7 @@ export default {
   height: 136px;
   left: 0;
   position: absolute;
-  top: 1px;
+  top: 200px;
   width: 1440px;
 }
 
@@ -218,7 +219,7 @@ export default {
   line-height: 22.4px;
   position: absolute;
   text-align: center;
-  top: 30px;
+  top: 220px;
   width: 265px;
 }
 
@@ -231,7 +232,7 @@ export default {
   letter-spacing: 0.96px;
   line-height: 38.4px;
   position: absolute;
-  top: 0;
+  top: 200px;
 }
 
 </style>
