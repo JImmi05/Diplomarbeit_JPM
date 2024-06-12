@@ -135,7 +135,7 @@ export default {
 
 .Lösung {
     position: absolute;
-    left: 160px;
+    left: 350px;
     top: 600px;
     width: 70px;
     height: 40px;
