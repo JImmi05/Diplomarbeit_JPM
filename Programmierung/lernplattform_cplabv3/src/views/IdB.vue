@@ -5,22 +5,22 @@
           <div class="text-wrapper-2">Letzte Aktualisierung: 17.02.2024</div>
           <div class="overlap">
             <p class="p">
-              Schritt 1: Standortauswahl Vor Beginn der Installation wird der ideale Standort für das Förderband im Lagerhaus ausgewählt. Der Standort wird basierend auf der effizienten Bewegung von Waren, Zugänglichkeit für Arbeitskräfte und zukünftigen Lagererweiterungen festgelegt.
+              Das Förderband ist maßgeblich für den Transport von Bauteilen und erhält so die Infrastruktur in der automatisierten Produktion. Es hat eine vorgegebene Laufrichtung, die auf dem Förderband mit einem Pfeil markiert ist. Die Geschwindigkeit des Förderbands ist bei unserer Lernstation vorgegeben und muss nicht manuell geregelt werden.
             </p>
-            <img class="image" alt="Image" src="../assets/Bohrstation.png" />
+            <img class="image" alt="Image" src="../assets/Verkabelung_Förderband.png" />
           </div>
           <div class="overlap-group">
             <p class="p">
-              Schritt 1: Standortauswahl Vor Beginn der Installation wird der ideale Standort für das Förderband im Lagerhaus ausgewählt. Der Standort wird basierend auf der effizienten Bewegung von Waren, Zugänglichkeit für Arbeitskräfte und zukünftigen Lagererweiterungen festgelegt.
+              Das Förderband ist bereits am Tableau verschraubt, sodass keine Montagearbeiten erforderlich sind. Ebenso ist das Förderband bereits verkabelt, da das Kabel des Förderbands von hinten in die Box geführt und dort aufgeteilt wird. Somit ist das Förderband vollständig einsatzbereit und kann über die Sicherheitsbuchsen rechts vorne am Tableau angesteuert werden. Es benötigt eine eigene Stromversorgung über die rote (+) und die blaue (-) Sicherheitsbuchse. Daneben befinden sich vier braune Sicherheitsbuchsen. Die Buchse oben rechts steuert das Förderband. Wird diese Buchse unter Spannung gesetzt, ist das Förderband eingeschaltet; liegt keine Spannung an der Buchse an, ist das Förderband ausgeschaltet.
             </p>
-            <img class="img" alt="Image" src="../assets/Bohrstation.png" />
+            
           </div>
         </div>
         <div class="page-heading">
           <div class="frame">
             <div class="div-wrapper">
               <div class="div-wrapper">
-                <div class="text-wrapper-3">Installation der Bohrstation</div>
+                <div class="text-wrapper-3">Funktionen und Aufgaben des Förderbandes</div>
               </div>
             </div>
           </div>
